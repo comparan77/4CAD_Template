@@ -8,6 +8,18 @@ block content
       h6.m-0.font-weight-bold.text-primary Datos Generales
     //Card body
     div.card-body
+      div.form-group
+        label(for="txt_cliente") Cliente
+        input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
+      div.form-group
+        label(for="txt_almacen") Almacén
+        input#txt_almacen.form-control(placeholder='Nombre del Almacén' type='text')
+      div.form-group
+        label(for="txt_fecha") Fecha
+        input#txt_fecha.form-control(placeholder='Fecha de llegada al almacén' type='text')
+      div.form-group
+        label(for="txt_hora") Hora
+        input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='text')
       
   div.card.shadow.mb-4
     //card header
@@ -18,8 +30,32 @@ block content
   div.card.shadow.mb-4
     //card header
     div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-      div.m-0.font-weight-bold.text-primary Unidades de transporte
+      div.m-0.font-weight-bold.text-primary Unidad de transporte
     div.card-body
+      div.form-group
+        label(for="txt_operador") Operador
+        input#txt_operador.form-control(placeholder='Nombre del Operador' type='text')
+      div.form-group
+        label(for="txt_sello") Sello
+        input#txt_sello.form-control(placeholder='Número de sello' type='text')
+      div.form-group
+        label(for="txt_linea") Línea
+        input#txt_linea.form-control(placeholder='Línea de la unidad' type='text')
+      div.form-group
+        label(for="txt_tipo") Tipo
+        input#txt_tipo.form-control(placeholder='Tipo de la unidad' type='text')
+      div.form-group
+        label(for="txt_placa") Placa
+        input#txt_placa.form-control(placeholder='Número de placa' type='text')
+      div.form-group
+        label(for="txt_caja") Caja
+        input#txt_caja.form-control(placeholder='Número de la caja' type='text')
+      div.form-group
+        label(for="txt_contenedor_1") Contenedor 1
+        input#txt_contenedor-1.form-control(placeholder='Número del contenedor 1' type='text')
+      div.form-group
+        label(for="txt_contenedor_2") Contenedor 2
+        input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
   
   div.card.shadow.mb-4
     //card header
