@@ -1,0 +1,49 @@
+extends layout
+
+block content
+
+  div.row
+    div.col-xl-6.col-lg-6
+      div.card.shadow.mb-4
+        //Card header
+        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+          h6.m-0.font-weight-bold.text-primary Datos Personales
+        //Card body
+        div.card-body
+          div.form-group
+            input#txt_nombre.form-control(placeholder='Nombre(s)' type='text')
+          div.form-group
+            input#txt_paterno.form-control(placeholder='Apellido Paterno' type='text')
+          div.form-group
+            input#txt_materno.form-control(placeholder='Apellido Materno' type='text')
+          
+    div.col-xl-6.col-lg-6
+      div.card.shadow.mb-4
+        //card header
+        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+          div.m-0.font-weight-bold.text-primary Datos de la moto
+        div.card-body
+          div.form-group
+            div.row
+              div.col
+                div.dropdown
+                  button#ddlModelo.btn.btn-secondary.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%") Modelo
+                  div.dropdown-menu(aria-labelledby="ddlModelo")
+                    a.dropdown-item(href="#") Pulsar 135
+                    a.dropdown-item(href="#") Dominar 400
+                    a.dropdown-item(href="#") Boxer 150
+              div.col
+                div.dropdown
+                  button#ddlAnio.btn.btn-secondary.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%") Año (Sujeto al modelo)
+                  div.dropdown-menu(aria-labelledby="ddlAnio")
+                    a.dropdown-item(href="#") 2017
+                    a.dropdown-item(href="#") 2018
+                    a.dropdown-item(href="#") 2019
+          div.form-group
+            div#div_fecha_cita
+              input.form-control(type='text')
+          div.form-group
+            a.btn.btn-primary.btn-icon-split(href='#')
+              span.icon.text-white-50
+                i.fas.fa-arrow-right
+              span.text Guardar cita

@@ -1,0 +1,246 @@
+doctype html
+
+html(lang='es_MX')
+  head
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    
+    title= title
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+
+    //Custom fonts for this template
+    link(rel='stylesheet', href='/vendor/fontawesome-free/css/all.min.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')
+
+    //Custom styles for this template
+    link(rel='stylesheet', href='css/sb-admin-2.min.css')
+    link(rel='stylesheet', href='stylesheets/style.css')
+    if needTbl
+      link(rel='stylesheet' href="/vendor/datatables/dataTables.bootstrap4.min.css")
+
+    //jquery ui
+    link(rel='stylesheet', href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+
+  body(id='page-top')
+    
+    #wrapper
+      ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
+
+        //Sidebar - Brand
+        a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='/')
+          div.sidebar-brand-icon
+            i.fas.fa-warehouse
+          div.sidebar-brand-text.mx-3 4CAD
+        //Divider
+        hr.sidebar-divider.my-0
+        //Nav Item - Dashboard
+        li.nav-item
+          a.nav-link(href='#')
+            i.fas.fa-fw.fa-tachometer-alt
+            span Dashboard
+        //Divider
+        hr.sidebar-divider
+        //Heading
+        div.sidebar-heading Operación
+        //Nav Item
+        li.nav-item(class=(option=="asn"?'active':''))
+          a.nav-link(href='asn')
+            i.fas.fa-fw.fa-calendar
+            span ASN
+        li.nav-item(class=(option=="recepcion"?'active':''))
+          a.nav-link(href='recepcion')
+            i.fas.fa-fw.fa-arrow-right
+            span Recepción
+        li.nav-item(class=(option=="almacenamiento"?'active':''))
+          a.nav-link(href='almacenamiento')
+            i.fas.fa-fw.fa-boxes
+            span Almacenamiento
+        li.nav-item(class=(option=="inventario"?'active':''))
+          a.nav-link(href='inventario')
+            i.fas.fa-fw.fa-clipboard-check
+            span Inventario
+        li.nav-item(class=(option=="expedicion"?'active':''))
+          a.nav-link(href='expedicion')
+            i.fas.fa-fw.fa-arrow-left
+            span Expedición
+        li.nav-item(class=(option=="devolucion"?'active':''))
+          a.nav-link(href='devolucion')
+            i.fas.fa-fw.fa-directions
+            span Devoluciones
+        //Divider
+        hr.sidebar-divider
+        //Heading
+        div.sidebar-heading Configuración
+        //Nav Item
+        li.nav-item
+          a.nav-link.collapsed(href='#' data-toggle="collapse" data-target="#collapseServices" aria-expanded="true" aria-controls="collapseServices")
+            i.fas.fa-fw.fa-database
+            span Catálogos
+          #collapseServices.collapse(aria-labelledby="headingServices" data-parent="#accordionSidebar")
+            div.bg-white.py-2.collapse-inner.rounded
+              a.collapse-item(href="citas") Almacenes
+              a.collapse-item(href="citas") Cortinas
+              a.collapse-item(href="citas") Tipos de Transporte
+              a.collapse-item(href="citas") Lineas de Transporte
+              a.collapse-item(href="citas") Usuarios
+              a.collapse-item(href="citas") Vigilancia
+        hr.sidebar-divider.d-none.d-md-block
+        div.text-center.d-none.d-md-inline
+          button#sidebarToggle.rounded-circle.border-0
+
+        //End of Sidebar
+
+      //Content wrapper
+      #content-wrapper.d-flex.flex-column
+        //Main Conten
+        #content
+          //Topbar
+          nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
+            //Sidebar Toggle (Topbar)
+            button#sidebarToggleTop.btn.btn-link.d-md-none.rounded-circle.mr-3
+              i.fa.fa-bars
+            //Topbar Search
+            form.d-none.d-sm-inline-block.form-inline.mr-auto.ml-md-3.my-2.my-md-0.mw-100.navbar-search
+              div.input-group
+                input.form-control.bg-light.border-0.small(type='text' placeholder='Buscar...' aria-label='search' aria-describedby='basic-addon2')
+                div.input-group-append
+                  button.btn.btn-primary(type='button')
+                    i.fas.fa-search.fa-sm
+            //Topbar Navbar
+            ul.navbar-nav.ml-auto
+              //Nav Item - Search Dropdown (Visible Only XS)
+              li.nav-item.dropdown.no-arrow.d-sm-none
+                a#searchDropdown.nav-link.dropdown-toggle(href='#' role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                  i.fas.fa-search.fa-fw
+                //Dropdown - Messages
+                div.dropdown-menu.dropdown-menu-right.p-3.shadow.animated--grow-in(aria-labelledby="searchDropdown")
+                  form.form-inline.mr-auto.w-100.navbar-search
+                    div.input-group
+                      input.form-control.bg-light.border-0.small(type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2")
+                      div.input-group-append
+                        button.btn.btn-primary(type="button")
+                          i.fas.fa-search.fa-sm
+              //Nav Item - Alerts
+              li.nav-item.dropdown.no-arrow.mx-1
+                a#alertsDropdown.nav-link.dropdown-toggle(href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                  i.fas.fa-bell.fa-fw
+                  //Counter - Alerts
+                  span.badge.badge-danger.badge-counter 3+
+                //Dropdown - Alerts
+                div.dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby="alertsDropdown")
+                  h6.dropdown-header Centro de Alertas
+                  a.dropdown-item.d-flex.align-items-center(href='#')
+                    div.mr-3
+                      div.icon-circle.bg-primary
+                        i.fas.fa-file-alt.text-white
+                      div.small.text-gray-500 Diciembre 12, 2019
+                      span.font-weight-bold Un nuevo reporte de mes está listo para descargar
+                  a.dropdown-item.d-flex.align-items-center(href='#')
+                    div.mr-3
+                      div.icon-circle.bg-success
+                        i.fas.fa-donate.text-white
+                      div.small.text-gray-500 Diciembre 7, 2019
+                      span.font-weight-bold Alerta de pago $288.50 MXN
+                  a.dropdown-item.d-flex.align-items-center(href='#')
+                    div.mr-3
+                      div.icon-circle.bg-warning
+                        i.fas.fa-exclamation-triangle.text-white
+                      div.small.text-gray-500 Diciembre 2, 2019
+                      span.font-weight-bold Alerta de gasto
+                  a.dropdown-item.text-center.small.text-gray-500(href='#') Muestra las alertas
+              div.topbar-divider.d-none.d-sm-block
+              //Nav Item - User Information
+              li.nav-item.dropdown.no-arrow
+                a#userDropdown.nav-link.dropdown-toggle(href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                  span.mr-2.d-none.d-lg-inline.text-gray-600.small Ricardo González
+                  img.img-profile.rounded-circle(src="images/adult-boy-casual.jpg")
+                // Dropdown - User Information
+                div.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby="userDropdown")
+                  a.dropdown-item(href="#") 
+                    i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
+                    |Perfil
+                  a.dropdown-item(href="#")
+                    i.fas.fa-cogs.fa-sm.fa-fw.mr-2.text-gray-400
+                    |Características
+                  a.dropdown-item(href="#")
+                    i.fas.fa-list.fa-sm.fa-fw.mr-2.text-gray-400 
+                    |Log de Actividades
+                  div.dropdown-divider
+                  a.dropdown-item(href="#" data-toggle="modal" data-target="#logoutModal")
+                    i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
+                    |Salir
+          //End of Topbar
+
+          //Being page content
+          div.container-fluid
+            //Page Heading
+            div.d-sm-flex.align-items-center.justify-content-between.mb-4
+              h1.h3.mb-0.text-gray-800 #{title} 
+
+            block content
+          //Container fluid
+        //End of Main Content
+
+        //Footer
+        footer.sticky-footer.bg-white
+          div.container.my-auto
+            div.copyright.text-center.my-auto
+              span Copyright &copy; 4CAD 2019
+        //End of Footer
+
+      //End of Content Wrapper
+    //End of Page Wrapper
+
+    //Scroll to Top Button
+    a.scroll-to-top.rounded(href='#page-top')
+      i.fas.fa-angle-up
+    
+    //Logout Modal
+    #logoutModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+      div.modal-dialog(role="document")
+        div.modal-content
+          div.modal-header
+            h5#exampleModalLabel.modal-title ¿Estás Listo para cerrar tu sesión?
+            button.close(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") x
+          div.modal-body Selecciona "Cerrar sesión" si estás listo para finalizar tu sesión actual..
+          div.modal-footer
+            button.btn.btn-secondary(type="button" data-dismiss="modal") Cancelar
+            a.btn.btn-primary(href="login.html") Cerrar sesión
+ 
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    
+    //- <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- Data Tables -->
+    if needTbl
+      <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    //- <script src="js/demo/chart-area-demo.js"></script>
+    //- <script src="js/demo/chart-pie-demo.js"></script>
+
+    link(rel='stylesheet', href='/js/jquery.min.js')
+    link(rel='stylesheet', href='/js/popper.js')
+    link(rel='stylesheet', href='/js/bootstrap.min.js')
+
+    <!-- Type head twitter-->
+    <script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.min.js"></script>
+
+    <!-- Custom for each page loaded -->
+    script(src='js/views/' + option + '.js')
