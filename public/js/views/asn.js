@@ -1,19 +1,20 @@
 $(document).ready(function() {
-  $.getJSON( "http://localhost:3000/", function( data ) {
 
-    var $dropdown = $('#ddl_cliente');
+  var arrCatalogos = ['cliente', 'aduana', 'transporte_tipo', 'transporte_linea'];
+  fillCatalog(arrCatalogos);
 
-    $.each(data, (key,val) => $dropdown.append('<option value="' + val.Id + '">' + val.Nombre + '</option>'));
-    $dropdown.selectpicker('refresh');
-    
-  });
-
-  $.getJSON( "http://localhost:3000/aduana", function( data ) {
-
-    var $dropdown = $('#ddl_aduana');
-
-    $.each(data, (key,val) => $dropdown.append('<option value="' + val.Id + '">' + val.Nombre + '</option>'));
-    $dropdown.selectpicker('refresh');
-    
-  });
 });
+
+function fillCatalog(arrCatalogos, idx = 0) {
+  var c = arrCatalogos[idx];
+  $.getJSON( "http://localhost:3000/" + c, function( data ) {
+
+    var $dropdown = $('#ddl_' + c);
+
+    $.each(data, (key,val) => $dropdown.append('<option value="' + val.Id + '">' + val.Nombre + '</option>'));
+    $dropdown.selectpicker('refresh');
+    idx ++;
+    if(idx < arrCatalogos.length)
+      fillCatalog(arrCatalogos, idx);
+  });  
+}

@@ -43,11 +43,9 @@ block content
             label(for="txt_sello") Sello
             input#txt_sello.form-control(placeholder='Número de sello' type='text')
           div.form-group
-            label(for="txt_linea") Línea
-            input#txt_linea.form-control(placeholder='Línea de la unidad' type='text')
+            select#ddl_transporte_linea.selectpicker(data-live-search="true" data-title="Seleccione una linea de transporte")
           div.form-group
-            label(for="txt_tipo") Tipo
-            input#txt_tipo.form-control(placeholder='Tipo de la unidad' type='text')
+            select#ddl_transporte_tipo.selectpicker(data-live-search="true" data-title="Seleccione un tipo de transporte")
           div.form-group
             label(for="txt_placa") Placa
             input#txt_placa.form-control(placeholder='Número de placa' type='text')
