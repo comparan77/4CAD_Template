@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-  var arrCatalogos = ['cliente', 'aduana', 'transporte_tipo', 'transporte_linea'];
+  var arrCatalogos = ['cliente', 'aduana', 'transporte_tipo', 'transporte_linea', 'mercancia_vendor'];
   fillCatalog(arrCatalogos);
-
+  $('#txt_fecha').datepicker();
 });
 
 function fillCatalog(arrCatalogos, idx = 0) {

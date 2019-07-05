@@ -17,7 +17,7 @@ block content
             select#ddl_aduana.selectpicker(data-live-search="true" data-title="Seleccione una aduana")
           div.form-group
             label(for="txt_fecha") Fecha
-            input#txt_fecha.form-control(placeholder='Fecha de llegada al almacén' type='text')
+            input#txt_fecha.form-control(type="text")
           div.form-group
             label(for="txt_hora") Hora
             input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='text')
@@ -66,8 +66,7 @@ block content
           div.m-0.font-weight-bold.text-primary 4.- Mercancía
         div.card-body
           div.form-group
-            label(for="txt_proveedor") Proveedor
-            input#txt_proveedor.form-control(placeholder='Nombre del Proveedor' type='text')
+            select#ddl_mercancia_vendor.selectpicker(data-live-search="true" data-title="Seleccione un vendor")
           div.form-group
             label(for="txt_producto") Producto
             input#txt_producto.form-control(placeholder='Nombre del producto' type='text')
