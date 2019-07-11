@@ -2,9 +2,11 @@ var lstDoc = [];
 var tbl_referencia;
 $(document).ready(function() {
 
-  var arrCatalogos = ['cliente', 'aduana', 'transporte_tipo', 'transporte_linea', 'mercancia_vendor', 'documento'];
+  var arrCatalogos = ['cliente', 'aduana', 'transporte_linea', 'mercancia_vendor', 'documento'];
   fillCatalog(arrCatalogos);
+  
   $('#txt_fecha').datepicker();
+  
   tbl_referencia = $('#tbl_referencia').DataTable({
     paging: false,
     searching: false,
@@ -40,6 +42,12 @@ $(document).ready(function() {
       tbl_referencia.row.add(lstDoc[i]).draw() ;
     }
   });
+
+  $('#ddl_transporte_linea').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    fillTransporte_tipo($('#ddl_transporte_linea').val());
+  });
+
+
 });
 
 function fillCatalog(arrCatalogos, idx = 0) {
@@ -54,4 +62,14 @@ function fillCatalog(arrCatalogos, idx = 0) {
     if(idx < arrCatalogos.length)
       fillCatalog(arrCatalogos, idx);
   });  
+}
+
+function fillTransporte_tipo(id) {
+  $('#ddl_transporte_tipo').html('');
+  $.getJSON("http://localhost:3000/transporte_linea_tipo/" + id, function(data) {
+      $.each(data, (key,val) =>  { 
+        $('#ddl_transporte_tipo').append('<option value="' + val.Id + '">' + val.Nombre + '</option>')
+    });
+    $('#ddl_transporte_tipo').selectpicker('refresh');
+  });
 }
