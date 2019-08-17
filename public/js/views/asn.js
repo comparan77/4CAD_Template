@@ -2,7 +2,7 @@ var lstDoc = [];
 var tbl_referencia;
 $(document).ready(function() {
 
-  var arrCatalogos = ['cliente', 'aduana', 'transporte_linea', 'mercancia_vendor', 'documento'];
+  var arrCatalogos = ['cliente', 'transporte_linea', 'mercancia_vendor', 'documento'];
   fillCatalog(arrCatalogos);
   
   $('#txt_fecha').datepicker();
@@ -45,6 +45,9 @@ $(document).ready(function() {
     fillTransporte_tipo($('#ddl_transporte_linea').val());
   });
 
+  $('#ddl_transporte_tipo').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    setFormTransporteTipo();
+  });
 
 });
 
@@ -85,8 +88,26 @@ function fillTransporte_tipo(id) {
   $('#ddl_transporte_tipo').html('');
   $.getJSON("http://localhost:3000/transporte_linea_tipo/" + id, function(data) {
       $.each(data, (key,val) =>  { 
-        $('#ddl_transporte_tipo').append('<option value="' + val.Id + '">' + val.Nombre + '</option>')
+        $('#ddl_transporte_tipo').append('<option placa="' + val.placa + '" caja="' + val.caja + '" cont_1="' + val.cont_1 + '" cont_2="' + val.cont_2 + '" value="' + val.Id + '">' + val.Nombre + '</option>')
     });
     $('#ddl_transporte_tipo').selectpicker('refresh');
+    $('#datosVehiculo').addClass('d-none');
   });
+}
+
+function setFormTransporteTipo() {
+  $('#datosVehiculo').removeClass('d-none');
+  $('#div_placa, #div_caja, #div_cont1, #div_cont2').addClass('d-none');
+
+  if($('#ddl_transporte_tipo  option:selected').attr('placa')=='1')
+    $('#div_placa').removeClass('d-none');
+  
+  if($('#ddl_transporte_tipo  option:selected').attr('caja')=='1')
+    $('#div_caja').removeClass('d-none');
+  
+  if($('#ddl_transporte_tipo  option:selected').attr('cont_1')=='1')
+    $('#div_cont1').removeClass('d-none');
+
+  if($('#ddl_transporte_tipo  option:selected').attr('cont_2')=='1')
+    $('#div_cont2').removeClass('d-none');
 }

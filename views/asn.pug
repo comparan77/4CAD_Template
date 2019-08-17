@@ -13,13 +13,13 @@ block content
             //- label(for="txt_cliente") Cliente
             //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
             select#ddl_cliente.selectpicker.form-control(data-live-search="true" data-title="Seleccione un Cliente")
+          //- div.form-group
+          //-   select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
           div.form-group
-            select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
-          div.form-group
-            label(for="txt_fecha") Fecha
+            label(for="txt_fecha") Fecha de arribo
             input#txt_fecha.form-control(type="text")
           div.form-group
-            label(for="txt_hora") Hora
+            label(for="txt_hora") Hora de arribo
             input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time')
   
     div.col-xl-6.col-lg-6
@@ -80,15 +80,16 @@ block content
             select#ddl_transporte_linea.selectpicker.form-control(data-live-search="true" data-title="Seleccione una linea de transporte")
           div.form-group
             select#ddl_transporte_tipo.selectpicker.form-control(data-live-search="true" data-title="Seleccione un tipo de transporte")
-          div.form-group
-            label(for="txt_placa") Placa
-            input#txt_placa.form-control(placeholder='Número de placa' type='text')
-          div.form-group
-            label(for="txt_caja") Caja
-            input#txt_caja.form-control(placeholder='Número de la caja' type='text')
-          div.form-group
-            label(for="txt_contenedor_1") Contenedor 1
-            input#txt_contenedor-1.form-control(placeholder='Número del contenedor 1' type='text')
-          div.form-group
-            label(for="txt_contenedor_2") Contenedor 2
-            input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
+          #datosVehiculo.d-none
+            div#div_placa.form-group
+              label(for="txt_placa") Placa
+              input#txt_placa.form-control(placeholder='Número de placa' type='text')
+            div#div_caja.form-group
+              label(for="txt_caja") Caja
+              input#txt_caja.form-control(placeholder='Número de la caja' type='text')
+            div#div_cont1.form-group
+              label(for="txt_contenedor_1") Contenedor 1
+              input#txt_contenedor-1.form-control(placeholder='Número del contenedor 1' type='text')
+            div#div_cont2.form-group
+              label(for="txt_contenedor_2") Contenedor 2
+              input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
