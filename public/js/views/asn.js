@@ -2,7 +2,7 @@ var lstDoc = [];
 var tbl_referencia;
 $(document).ready(function() {
 
-  var arrCatalogos = ['cliente', 'transporte_linea', 'mercancia_vendor', 'documento'];
+  var arrCatalogos = ['cliente', 'transporte_linea', 'vendor', 'documento'];
   fillCatalog(arrCatalogos);
   
   $('#txt_fecha').datepicker();
@@ -49,6 +49,10 @@ $(document).ready(function() {
     setFormTransporteTipo();
   });
 
+  $('#ddl_vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    fillVendor_mercancia($('#ddl_vendor').val());
+  });
+
 });
 
 function fillDoc() {
@@ -92,6 +96,16 @@ function fillTransporte_tipo(id) {
     });
     $('#ddl_transporte_tipo').selectpicker('refresh');
     $('#datosVehiculo').addClass('d-none');
+  });
+}
+
+function fillVendor_mercancia(id) {
+  $('#ddl_vendor_mercancia').html('');
+  $.getJSON("http://localhost:3000/vendor_mercancia/" + id, function(data) {
+      $.each(data, (key,val) =>  { 
+        $('#ddl_vendor_mercancia').append('<option value="' + val.Id + '">' + val.Nombre + '</option>')
+    });
+    $('#ddl_vendor_mercancia').selectpicker('refresh');
   });
 }
 
