@@ -5,7 +5,12 @@ $(document).ready(function() {
   var arrCatalogos = ['cliente', 'transporte_linea', 'vendor', 'documento'];
   fillCatalog(arrCatalogos);
   
-  $('#txt_fecha').datepicker();
+  $('#txt_fecha').datepicker({
+    regional: 'es',
+    dateFormat: 'dd-mm-yy ',
+    altFormat: 'yy-mm-dd',
+    altField: '#altTxt_fecha'
+  });
   
   tbl_referencia = $('#tbl_referencia').DataTable({
     paging: false,
@@ -51,6 +56,38 @@ $(document).ready(function() {
 
   $('#ddl_vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
     fillVendor_mercancia($('#ddl_vendor').val());
+  });
+
+  $('#add_asn').click(obj => {
+
+    var lDoc = [];
+    for(var i in lstDoc) {
+      lDoc.push({
+        id_documento: lstDoc[i].id,
+        referencia: lstDoc[i].valor
+      });
+    }
+
+    var oAsn = {
+      id_cliente: $('#ddl_cliente').val(),
+      fecha_arribo: $('#altTxt_fecha').val(),
+      hora_arribo: $('#txt_hora').val(),
+      id_mercancia_vendor: $('#ddl_vendor_mercancia').val(),
+      bulto_declarado: $('#txt_bto').val(),
+      pieza_declarada: $('#txt_pza').val(),
+      operador: $('#txt_operador').val(),
+      sello: $('#txt_sello').val(),
+      id_transporte_linea: $('#ddl_transporte_linea').val(),
+      id_transporte_tipo: $('#ddl_transporte_tipo').val(),
+      placa: $('#txt_placa').val(),
+      caja: $('#txt_caja').val(),
+      cont_1: $('#txt_contenedor-1').val(),
+      cont_2: $('#txt_contenedor-2').val(),
+      lstDoc: lDoc
+    };
+
+    console.log(JSON.stringify(oAsn));
+
   });
 
 });

@@ -2,7 +2,7 @@ extends layout
 
 block content
   div.row
-    div.col-xl-6.col-lg-6
+    div.col-xl-12.col-lg-12
       div.card.shadow.mb-4
         //Card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
@@ -18,11 +18,12 @@ block content
           div.form-group
             label(for="txt_fecha") Fecha de arribo
             input#txt_fecha.form-control(type="text")
+            input#altTxt_fecha(type="hidden")
           div.form-group
             label(for="txt_hora") Hora de arribo
             input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time')
   
-    div.col-xl-6.col-lg-6
+    div.col-xl-12.col-lg-12
       div.card.shadow.mb-4
         //card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
@@ -41,7 +42,7 @@ block content
             input#txt_pza.form-control(placeholder='Piezas declaradas' type='number')
   
   div.row
-    div.col-xl-6.col-lg-6
+    div.col-xl-12.col-lg-12
       div.card.shadow.mb-4
         //card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
@@ -64,7 +65,7 @@ block content
                     th(align="center") Quitar
                 tbody
   
-    div.col-xl-6.col-lg-6
+    div.col-xl-12.col-lg-12
       div.card.shadow.mb-4
         //card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
@@ -93,3 +94,6 @@ block content
             div#div_cont2.form-group
               label(for="txt_contenedor_2") Contenedor 2
               input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
+ 
+  .row
+    button#add_asn.btn.btn-primary(type="button") Guardar Aviso de Arribo
