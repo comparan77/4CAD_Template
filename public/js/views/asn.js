@@ -86,7 +86,17 @@ $(document).ready(function() {
       lstDoc: lDoc
     };
 
-    console.log(JSON.stringify(oAsn));
+    $.post("http://localhost:3000/asn", oAsn, function(data) {
+      console.log(JSON.stringify(data));
+    })
+    .fail(function() {
+      alert( "error" );
+    })
+    .always(function() {
+      alert( "finished" );
+    });
+
+    // console.log(JSON.stringify(oAsn));
 
   });
 
