@@ -86,7 +86,7 @@ $(document).ready(function() {
       lstDoc: lDoc
     };
 
-    $.post("http://localhost:3000/asn", oAsn, function(data) {
+    $.post("http://localhost:3002/asn", oAsn, function(data) {
       console.log(JSON.stringify(data));
     })
     .fail(function() {
@@ -123,7 +123,7 @@ function fillDoc() {
 
 function fillCatalog(arrCatalogos, idx = 0) {
   var c = arrCatalogos[idx];
-  $.getJSON( "http://localhost:3000/" + c, function( data ) {
+  $.getJSON( "http://localhost:3002/" + c, function( data ) {
 
     var $dropdown = $('#ddl_' + c);
 
@@ -137,7 +137,7 @@ function fillCatalog(arrCatalogos, idx = 0) {
 
 function fillTransporte_tipo(id) {
   $('#ddl_transporte_tipo').html('');
-  $.getJSON("http://localhost:3000/transporte_linea_tipo/" + id, function(data) {
+  $.getJSON("http://localhost:3002/transporte_linea_tipo/" + id, function(data) {
       $.each(data, (key,val) =>  { 
         $('#ddl_transporte_tipo').append('<option placa="' + val.placa + '" caja="' + val.caja + '" cont_1="' + val.cont_1 + '" cont_2="' + val.cont_2 + '" value="' + val.Id + '">' + val.Nombre + '</option>')
     });
@@ -148,7 +148,7 @@ function fillTransporte_tipo(id) {
 
 function fillVendor_mercancia(id) {
   $('#ddl_vendor_mercancia').html('');
-  $.getJSON("http://localhost:3000/vendor_mercancia/" + id, function(data) {
+  $.getJSON("http://localhost:3002/vendor_mercancia/" + id, function(data) {
       $.each(data, (key,val) =>  { 
         $('#ddl_vendor_mercancia').append('<option value="' + val.Id + '">' + val.Nombre + '</option>')
     });
