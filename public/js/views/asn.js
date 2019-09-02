@@ -63,26 +63,26 @@ $(document).ready(function() {
     var lDoc = [];
     for(var i in lstDoc) {
       lDoc.push({
-        id_documento: lstDoc[i].id,
-        referencia: lstDoc[i].valor
+        Id_documento: lstDoc[i].id,
+        Referencia: lstDoc[i].valor
       });
     }
 
     var oAsn = {
-      id_cliente: $('#ddl_cliente').val(),
-      fecha_arribo: $('#altTxt_fecha').val(),
-      hora_arribo: $('#txt_hora').val(),
-      id_mercancia_vendor: $('#ddl_vendor_mercancia').val(),
-      bulto_declarado: $('#txt_bto').val(),
-      pieza_declarada: $('#txt_pza').val(),
-      operador: $('#txt_operador').val(),
-      sello: $('#txt_sello').val(),
-      id_transporte_linea: $('#ddl_transporte_linea').val(),
-      id_transporte_tipo: $('#ddl_transporte_tipo').val(),
-      placa: $('#txt_placa').val(),
-      caja: $('#txt_caja').val(),
-      cont_1: $('#txt_contenedor-1').val(),
-      cont_2: $('#txt_contenedor-2').val(),
+      Id_cliente: $('#ddl_cliente').val(),
+      Fecha_arribo: $('#altTxt_fecha').val(),
+      Hora_arribo: $('#txt_hora').val(),
+      Id_mercancia_vendor: $('#ddl_vendor_mercancia').val(),
+      Bulto_declarado: $('#txt_bto').val(),
+      Pieza_declarada: $('#txt_pza').val(),
+      Operador: $('#txt_operador').val(),
+      Sello: $('#txt_sello').val(),
+      Id_transporte_linea: $('#ddl_transporte_linea').val(),
+      Id_transporte_tipo: $('#ddl_transporte_tipo').val(),
+      Placa: $('#txt_placa').val(),
+      Caja: $('#txt_caja').val(),
+      Cont_1: $('#txt_contenedor-1').val(),
+      Cont_2: $('#txt_contenedor-2').val(),
       lstDoc: lDoc
     };
 
