@@ -86,15 +86,31 @@ $(document).ready(function() {
       lstDoc: lDoc
     };
 
-    $.post("http://localhost:3002/asn", oAsn, function(data) {
-      console.log(JSON.stringify(data));
-    })
-    .fail(function() {
-      alert( "error" );
-    })
-    .always(function() {
-      alert( "finished" );
+    var request = $.ajax({
+      url: "http://localhost:3002/asn",
+      method: "POST",
+      data: JSON.stringify(oAsn),
+      contentType: "application/json",
+      // dataType: 'json'
     });
+     
+    request.done(function( data ) {
+      console.log(JSON.stringify(data));
+    });
+     
+    request.fail(function( jqXHR, textStatus ) {
+      alert( "Request failed: " + textStatus );
+    });
+
+    // $.post("http://localhost:3002/asn", JSON.stringify(oAsn), function(data) {
+    //   console.log(JSON.stringify(data));
+    // })
+    // .fail(function() {
+    //   alert( "error" );
+    // })
+    // .always(function() {
+    //   alert( "finished" );
+    // });
 
     // console.log(JSON.stringify(oAsn));
 
