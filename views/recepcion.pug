@@ -1,5 +1,18 @@
 extends layout
+block styles
+  <link href='https://unpkg.com/@fullcalendar/core@4.3.1/main.min.css' rel='stylesheet' />
+  <link href='https://unpkg.com/@fullcalendar/daygrid@4.3.0/main.min.css' rel='stylesheet' />
+  <link href='https://unpkg.com/@fullcalendar/timegrid@4.3.0/main.min.css' rel='stylesheet' />
+  <link href='https://unpkg.com/@fullcalendar/bootstrap/main.min.css' rel='stylesheet' />
 
 block content
 
   p #{message}
+  <div id='calendar'></div>
+
+block scripts
+  <script src='https://unpkg.com/@fullcalendar/core@4.3.1/main.min.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/core@4.3.1/locales/es.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/daygrid@4.3.0/main.min.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/timegrid@4.3.0/main.min.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/bootstrap/main.min.js'></script>

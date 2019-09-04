@@ -110,3 +110,9 @@ width: 100%;
 .tt-hint {
   width: 100%;
 }
+
+/* Full callendar */
+#calendar {
+  max-width: 900px;
+  margin: 40px auto;
+}
