@@ -12,7 +12,7 @@ block content
           div.form-group
             //- label(for="txt_cliente") Cliente
             //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
-            select#ddl_cliente.selectpicker.form-control(data-live-search="true" data-title="Seleccione un Cliente")
+            select#ddl_cliente.selectpicker.form-control(name="ddl_cliente" aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente")
           //- div.form-group
           //-   select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
           div.form-group
@@ -30,10 +30,10 @@ block content
           div.m-0.font-weight-bold.text-primary 2.- Mercancía
         div.card-body
           div.form-group
-            select#ddl_vendor.selectpicker.form-control(data-live-search="true" data-title="Seleccione un vendor")
+            select#ddl_vendor.selectpicker.form-control(name="ddl_vendor" data-live-search="true" data-title="Seleccione un vendor")
           div.form-group
             label(for="txt_producto") Producto
-            select#ddl_vendor_mercancia.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto")
+            select#ddl_vendor_mercancia.selectpicker.form-control(name="ddl_vendor_mercancia" data-live-search="true" data-title="Seleccione el producto")
           div.form-group
             label(for="txt_bto") Bultos Declarados
             input#txt_bto.form-control(placeholder='Bultos declarados' type='number')
@@ -49,7 +49,7 @@ block content
           div.m-0.font-weight-bold.text-primary 3.- Documentación
         div.card-body
           div.form-group
-            select#ddl_documento.selectpicker.form-control(data-live-search="true" data-title="Seleccione documentos")
+            select#ddl_documento.selectpicker.form-control(name="ddl_documento" data-live-search="true" data-title="Seleccione documentos")
           div.form-group
             label(for="txt_referencia") Referencia
             input#txt_referencia.form-control(type="text")
@@ -78,9 +78,9 @@ block content
             label(for="txt_sello") Sello
             input#txt_sello.form-control(placeholder='Número de sello' type='text')
           div.form-group
-            select#ddl_transporte_linea.selectpicker.form-control(data-live-search="true" data-title="Seleccione una linea de transporte")
+            select#ddl_transporte_linea.selectpicker.form-control(name="ddl_transporte_linea" data-live-search="true" data-title="Seleccione una linea de transporte")
           div.form-group
-            select#ddl_transporte_tipo.selectpicker.form-control(data-live-search="true" data-title="Seleccione un tipo de transporte")
+            select#ddl_transporte_tipo.selectpicker.form-control(name="ddl_transporte_tipo" data-live-search="true" data-title="Seleccione un tipo de transporte")
           #datosVehiculo.d-none
             div#div_placa.form-group
               label(for="txt_placa") Placa

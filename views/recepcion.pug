@@ -8,7 +8,8 @@ block styles
 block content
 
   p #{message}
-
+  .form-group
+    select#ddl_cliente.selectpicker.form-control(data-live-search="true" data-title="Todos los clientes")
   ul#myTab.nav.nav-tabs(role="tablist")
     li.nav-item
       a#schedule-tab.nav-link.active(data-toggle="tab" href="#schedule" role="tab" aria-controls="schedule" aria-selected="true") En calendario

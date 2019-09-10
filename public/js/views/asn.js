@@ -142,13 +142,19 @@ function fillCatalog(arrCatalogos, idx = 0) {
   $.getJSON( "http://localhost:3002/" + c, function( data ) {
 
     var $dropdown = $('#ddl_' + c);
-
-    $.each(data, (key,val) => $dropdown.append('<option value="' + val.Id + '">' + val.Nombre + '</option>'));
+    fillDropDown(data, 'ddl_' + c, 'Id', 'Nombre');
+    //$.each(data, (key,val) => $dropdown.append('<option value="' + val.Id + '">' + val.Nombre + '</option>'));
+    $dropdown.selectpicker();
     $dropdown.selectpicker('refresh');
     idx ++;
     if(idx < arrCatalogos.length)
       fillCatalog(arrCatalogos, idx);
   });  
+}
+
+function fillDropDown(data, idDdlControl, valueName, textName) {
+  var $dropdown = $('#' + idDdlControl);
+  $.each(data, (key,val) => $dropdown.append('<option value="' + val[valueName] + '">' + val[textName] + '</option>\n'));
 }
 
 function fillTransporte_tipo(id) {
