@@ -19,7 +19,18 @@ block content
   .tab-content
     #schedule.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="schedule-tab")
       #calendar
-    #receiving.tab-pane.fade(role="tabpanel" aria-labelledby="receiving-tab") En construcción ...
+    #receiving.tab-pane.fade(role="tabpanel" aria-labelledby="receiving-tab") 
+      .container(style="margin-top: 20px")
+        .row
+          .col-xl-3.col-md-6.mb-4
+            .card.border-left-primary.shadow.h-100.py-2
+              .card-body
+                .row.no-gutters.align-items-center
+                  .col.mr-2
+                    .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1 Almacén
+                    .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Disp 3
+                    .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Ocup 2
+
 
 block scripts
   <script src='https://unpkg.com/@fullcalendar/core@4.3.1/main.min.js'></script>
