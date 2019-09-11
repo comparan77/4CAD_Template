@@ -2,7 +2,7 @@ var lstDoc = [];
 var tbl_referencia;
 $(document).ready(function() {
 
-  var arrCatalogos = ['cliente', 'transporte_linea', 'vendor', 'documento'];
+  var arrCatalogos = ['cliente', 'almacen', 'transporte_linea', 'vendor', 'documento'];
   fillCatalog(arrCatalogos);
   
   $('#txt_fecha').datepicker({
@@ -70,6 +70,7 @@ $(document).ready(function() {
 
     var oAsn = {
       Id_cliente: $('#ddl_cliente').val(),
+      Id_almacen: $('#ddl_almacen').val(),
       Fecha_arribo: $('#altTxt_fecha').val(),
       Hora_arribo: $('#txt_hora').val(),
       Id_mercancia_vendor: $('#ddl_vendor_mercancia').val(),
