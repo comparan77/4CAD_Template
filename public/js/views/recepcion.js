@@ -40,7 +40,8 @@ function fillCliente() {
 
 function fillCortinasRec() {
     $.getJSON( "http://localhost:3002/asn_rec_cortina", (data) => { 
-        arrAsnRecCor = JSON.stringify(data);
+        arrAsnRecCor = data;
+        arrAsnRecCor = [];
         console.log(arrAsnRecCor);
     });
 }
