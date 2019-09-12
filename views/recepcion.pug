@@ -22,15 +22,15 @@ block content
     #receiving.tab-pane.fade(role="tabpanel" aria-labelledby="receiving-tab") 
       .container(style="margin-top: 20px")
         .row
-          each item in {arrAsnRecCor}
+          each item in arrAsnRecCor
             .col-xl-3.col-md-6.mb-4
               .card.border-left-primary.shadow.h-100.py-2
                 .card-body
                   .row.no-gutters.align-items-center
                     .col.mr-2
-                      .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1 !{item}
-                      .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Disp 3
-                      .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Ocup 2
+                      .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1 #{item["almacen"]}
+                      .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Disp #{item["cortinas"] - item["operacion"]}
+                      .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Ocup #{item["operacion"]}
 
 
 block scripts
@@ -39,3 +39,4 @@ block scripts
   <script src='https://unpkg.com/@fullcalendar/daygrid@4.3.0/main.min.js'></script>
   <script src='https://unpkg.com/@fullcalendar/timegrid@4.3.0/main.min.js'></script>
   <script src='https://unpkg.com/@fullcalendar/bootstrap/main.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js'></script>

@@ -10,7 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Recepcion
-    fillCortinasRec();
+    // fillCortinasRec();
+    $('#receiving').click(() => { 
+        var socket = io.connect('http://localhost:3001');
+        // socket.on('rec_cortina', (data) => alert(data));
+    });
 });
 
 function initCalendar(eventsSource) {
@@ -36,12 +40,4 @@ function fillCliente() {
     $dropdown.selectpicker('refresh');
 
   });  
-}
-
-function fillCortinasRec() {
-    $.getJSON( "http://localhost:3002/asn_rec_cortina", (data) => { 
-        arrAsnRecCor = data;
-        arrAsnRecCor = [];
-        console.log(arrAsnRecCor);
-    });
 }
