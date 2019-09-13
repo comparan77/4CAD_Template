@@ -12,10 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Recepcion
     // fillCortinasRec();
     $('#receiving').click(() => { 
-        var socket = io.connect('http://localhost:3001');
-        // socket.on('rec_cortina', (data) => alert(data));
+        var socket = io();
+        socket.emit('udt_rec_cortina','');
+        socket.on('udt_rec_cortina', (data) => {
+            console.log('datos: ');
+            console.log(data);
+            
+        })
     });
+
 });
+
+function udt_rec_cortina(data) {
+    $.each(data, (key,val) => {
+        $('#div_almacen_' + data.id_almacen)
+    })
+}
 
 function initCalendar(eventsSource) {
     var calendarEl = document.getElementById('calendar');

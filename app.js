@@ -9,6 +9,15 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// socket
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+app.use(function(req, res, next){
+  res.io = io;
+  next();
+});
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -28,6 +37,13 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// io.on('connection', (socket)=> {
+//   // socket.emit('rec_cortina', request('http://localhost:3002/asn_rec_cortina', (error, response, body) => {
+//   //   return JSON.parse(body);
+//   // }));
+//   console.log('a user connected');
+// });
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -44,4 +60,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = {app: app, server: server};
