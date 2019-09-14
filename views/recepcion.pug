@@ -29,8 +29,10 @@ block content
                   .row.no-gutters.align-items-center
                     .col.mr-2(id='div_almacen_' + item["id_almacen"])
                       .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1 #{item["almacen"]}
-                      .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Disp #{item["cortinas"] - item["operacion"]}
-                      .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Ocup #{item["operacion"]}
+                      .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Disp 
+                        .span #{item["cortinas"] - item["operacion"]}
+                      .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cortinas Ocup 
+                        .span #{item["operacion"]}
 
 
 block scripts

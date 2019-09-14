@@ -21,13 +21,15 @@ router.get('/recepcion', (req, res, next) => {
     // console.log(JSON.parse(body));
     res.render('recepcion', { title: 'Recepción de Mercancía', option: 'recepcion' , arrAsnRecCor: JSON.parse(body)});
   });
-  res.io.on('connection', (socket) => {
+  
+  // Example of how to use socket
+  /* res.io.on('connection', (socket) => {
     socket.on('udt_rec_cortina', () => {
       request('http://localhost:3002/asn_rec_cortina', (error, response, body) => {
         socket.emit('udt_rec_cortina', JSON.parse(body));
       });
     });
-  })
+  }) */
 });
 
 /* Almacenamiento. */

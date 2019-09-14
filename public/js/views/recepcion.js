@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initCalendar('http://localhost:3002/asn_schedule/' + $('#ddl_cliente').val())
     });
 
-    // Recepcion
-    // fillCortinasRec();
-    $('#receiving').click(() => { 
+    /* $('#receiving').click(() => { 
         var socket = io();
         socket.emit('udt_rec_cortina','');
         socket.on('udt_rec_cortina', (data) => {
@@ -19,13 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(data);
             
         })
-    });
-
+    }); */
 });
 
-function udt_rec_cortina(data) {
-    $.each(data, (key,val) => {
-        $('#div_almacen_' + data.id_almacen)
+function udt_rec_cortina() {
+    $.getJSON("http://localhost:3002/asn_rec_cortina", (data) => {
+        $.each(data, (key,val) => {
+            $('#div_almacen_' + val.id_almacen + ' h6:nth-child(1)').children('span').html(val.cortinas - val.operacion);
+            $('#div_almacen_' + val.id_almacen + ' h6:nth-child(2)').children('span').html(val.operacion);
+        })
     })
 }
 
