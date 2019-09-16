@@ -18,14 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
         })
     }); */
+    udt_rec_cortina();
 });
 
 function udt_rec_cortina() {
     $.getJSON("http://localhost:3002/asn_rec_cortina", (data) => {
         $.each(data, (key,val) => {
-            $('#div_almacen_' + val.id_almacen + ' h6:nth-child(1)').children('span').html(val.cortinas - val.operacion);
-            $('#div_almacen_' + val.id_almacen + ' h6:nth-child(2)').children('span').html(val.operacion);
+            $('#div_almacen_' + val.id_almacen + ' div:nth-child(2)').children('div').html(val.cortinas - val.operacion);
+            $('#div_almacen_' + val.id_almacen + ' div:nth-child(3)').children('div').html(val.operacion);
         })
+    }).done(()=> {
+        setTimeout(udt_rec_cortina,5000);
     })
 }
 
