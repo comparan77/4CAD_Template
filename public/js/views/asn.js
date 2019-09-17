@@ -58,7 +58,9 @@ $(document).ready(function() {
     fillVendor_mercancia($('#ddl_vendor').val());
   });
 
-  $('#add_asn').click(obj => {
+  $('#add_asn').click(() => {
+
+    $('#add_asn').prop('disabled', true).prop('aria-disabled', true).html('Guardando ASN...');
 
     var lDoc = [];
     for(var i in lstDoc) {
@@ -97,6 +99,7 @@ $(document).ready(function() {
      
     request.done(function( data ) {
       console.log(JSON.stringify(data));
+      $('#add_asn').prop('disabled', false).prop('aria-disabled', false).html('Guardar Aviso de Arribo');
     });
      
     request.fail(function( jqXHR, textStatus ) {
