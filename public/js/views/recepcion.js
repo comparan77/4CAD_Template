@@ -1,6 +1,7 @@
 var calendar;
 var arrAsnRecCor = [];
 var to_udt_cortina;
+var to_udt_cortina_alm;
 document.addEventListener('DOMContentLoaded', function() {
     // Calendarizados
     initCalendar('http://localhost:3002/asn_schedule');
@@ -22,23 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
     $('.card-warehouse').each(function() {
         $(this).click(() => {
             var id_almacen = $(this).attr('id').split('_')[2];
-            if(to_udt_cortina)
+            if(to_udt_cortina != undefined)
                 clearTimeout(to_udt_cortina);
                 to_udt_cortina = undefined;
-            $.ajax({
-                url: 'http://localhost:3001/recepcion_cortina/' + id_almacen,
-                success: function(result) {
-                    $('#div_cortina').html(result).removeClass('d-none');
-                    $('#div-almacenes').addClass('d-none');
-
-                    $('#lnk_selected_warehouse').click(()=> {
-                        $('#div_cortina').addClass('d-none');
-                        $('#div-almacenes').removeClass('d-none');
-                        if(to_udt_cortina == undefined) 
-                            udt_rec_cortina();
-                        return false;
-                    });
-                }
+            udt_rec_cortina_alm(id_almacen, () => {
+                $('#div_cortina').removeClass('d-none');
+                $('#div-almacenes').addClass('d-none');
             })
         })
     })
@@ -54,6 +44,30 @@ function udt_rec_cortina() {
         })
     }).done(()=> {
         to_udt_cortina = setTimeout(udt_rec_cortina,5000);
+    })
+}
+
+function udt_rec_cortina_alm(id_almacen, callback) {
+    $.ajax({
+        url: 'http://localhost:3001/recepcion_cortina/' + id_almacen,
+        success: function(result) {
+            $('#div_cortina').html(result);
+
+            $('#lnk_selected_warehouse').click(()=> {
+                $('#div_cortina').addClass('d-none');
+                $('#div-almacenes').removeClass('d-none');
+                if(to_udt_cortina == undefined) 
+                    udt_rec_cortina();
+                clearTimeout(to_udt_cortina_alm);
+                return false;
+            });
+
+            to_udt_cortina_alm = setTimeout(() => {
+                udt_rec_cortina_alm(id_almacen);
+            }, 5000);
+
+            if(callback) callback();
+        }
     })
 }
 
