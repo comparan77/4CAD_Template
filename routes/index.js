@@ -23,7 +23,10 @@ router.get('/recepcion', (req, res, next) => {
   });
 
   router.get('/recepcion_cortina/:id', (req, res, next)=> {
-    res.render('recepcion_cortina', {almacen: 'almacen: ' + req.params.id})
+    request('http://localhost:3002/asn_rec_cortina/' + req.params.id, (error, response, body) => {
+      data = JSON.parse(body);
+      res.render('recepcion_cortina', {almacen: data[0].almacen, arrCortinaByAlm: data})
+    });
   });
 
   // Example of how to use socket
