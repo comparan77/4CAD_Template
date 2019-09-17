@@ -1,5 +1,6 @@
 var calendar;
 var arrAsnRecCor = [];
+var to_udt_cortina;
 document.addEventListener('DOMContentLoaded', function() {
     // Calendarizados
     initCalendar('http://localhost:3002/asn_schedule');
@@ -18,6 +19,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
         })
     }); */
+    $('.card-warehouse').each(function() {
+        $(this).click(() => {
+            var id_almacen = $(this).attr('id').split('_')[2];
+            if(to_udt_cortina)
+                clearTimeout(to_udt_cortina);
+                to_udt_cortina = undefined;
+            $.ajax({
+                url: 'http://localhost:3001/recepcion_cortina/' + id_almacen,
+                success: function(result) {
+                    $('#div_cortina').html(result).removeClass('d-none');
+                    $('#div-almacenes').addClass('d-none');
+
+                    $('#lnk_selected_warehouse').click(()=> {
+                        $('#div_cortina').addClass('d-none');
+                        $('#div-almacenes').removeClass('d-none');
+                        if(to_udt_cortina == undefined) 
+                            udt_rec_cortina();
+                        return false;
+                    });
+                }
+            })
+        })
+    })
+
     udt_rec_cortina();
 });
 
@@ -28,7 +53,7 @@ function udt_rec_cortina() {
             $('#div_almacen_' + val.id_almacen + ' div:nth-child(3)').children('div').html(val.operacion);
         })
     }).done(()=> {
-        setTimeout(udt_rec_cortina,5000);
+        to_udt_cortina = setTimeout(udt_rec_cortina,5000);
     })
 }
 

@@ -21,7 +21,11 @@ router.get('/recepcion', (req, res, next) => {
     // console.log(JSON.parse(body));
     res.render('recepcion', { title: 'Recepción de Mercancía', option: 'recepcion' , arrAsnRecCor: JSON.parse(body)});
   });
-  
+
+  router.get('/recepcion_cortina/:id', (req, res, next)=> {
+    res.render('recepcion_cortina', {almacen: 'almacen: ' + req.params.id})
+  });
+
   // Example of how to use socket
   /* res.io.on('connection', (socket) => {
     socket.on('udt_rec_cortina', () => {
