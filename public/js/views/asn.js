@@ -98,7 +98,7 @@ $(document).ready(function() {
     });
      
     request.done(function( data ) {
-      console.log(JSON.stringify(data));
+      alert('El aviso de arribo se guardó exitosamente')
       $('#add_asn').prop('disabled', false).prop('aria-disabled', false).html('Guardar Aviso de Arribo');
     });
      
