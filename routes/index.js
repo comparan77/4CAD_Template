@@ -21,13 +21,21 @@ router.get('/recepcion', (req, res, next) => {
     // console.log(JSON.parse(body));
     res.render('recepcion', { title: 'Recepción de Mercancía', option: 'recepcion' , arrAsnRecCor: JSON.parse(body)});
   });
+});
 
-  router.get('/recepcion_cortina/:id', (req, res, next)=> {
-    request('http://localhost:3002/asn_rec_cortina/' + req.params.id, (error, response, body) => {
-      data = JSON.parse(body);
-      res.render('recepcion_cortina', {almacen: data[0].almacen, arrCortinaByAlm: data})
-    });
+router.get('/recepcion_cortina/:id', (req, res, next)=> {
+  request('http://localhost:3002/asn_rec_cortina/' + req.params.id, (error, response, body) => {
+    data = JSON.parse(body);
+    res.render('recepcion_cortina', {almacen: data[0].almacen, arrCortinaByAlm: data})
   });
+});
+
+router.get('/recepcion_cortina_asn/:id', (req, res, next)=> {
+  request('http://localhost:3002/asn_rec_cortina_id/' + req.params.id, (error, response, body) => {
+    data = JSON.parse(body);
+    res.render('recepcion_cortina_asn', {asn_data: data})
+  });
+});
 
   // Example of how to use socket
   /* res.io.on('connection', (socket) => {
@@ -37,7 +45,7 @@ router.get('/recepcion', (req, res, next) => {
       });
     });
   }) */
-});
+
 
 /* Almacenamiento. */
 router.get('/almacenamiento', (req, res, next) => {

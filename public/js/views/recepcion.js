@@ -62,10 +62,46 @@ function udt_rec_cortina_alm(id_almacen, callback) {
                 return false;
             });
 
+            $('#lnk_selected_gate').click(() => {
+                $('#gates_by_warehose').removeClass('d-none');
+                $('#gates').removeClass('d-none')
+                $('#gates_selected').addClass('d-none');
+                $('#gate').addClass('d-none');
+                $('#gate_by_asn').addClass('d-none');
+                to_udt_cortina_alm = setTimeout(() => {
+                    udt_rec_cortina_alm(id_almacen);
+                }, 5000);
+            });
+
+            $('.asn_r_id').each(function() {
+                $(this).click(() => {
+                    var id_asn_recepcion = $(this).prop('id').split('_')[2];
+                    
+                    fillAsnData(id_asn_recepcion, () => {
+                        $('#gates_by_warehose').addClass('d-none');
+                        $('#gates').addClass('d-none')
+                        $('#gates_selected').removeClass('d-none');
+                        $('#gate').removeClass('d-none');
+                        $('#gate_by_asn').removeClass('d-none');
+                        clearTimeout(to_udt_cortina_alm);
+                    });
+                })
+            });
+
             to_udt_cortina_alm = setTimeout(() => {
                 udt_rec_cortina_alm(id_almacen);
             }, 5000);
 
+            if(callback) callback();
+        }
+    })
+}
+
+function fillAsnData(id_asn_r, callback) {
+    $.ajax({
+        url: 'http://localhost:3001/recepcion_cortina_asn/' + id_asn_r,
+        success: function(result) {
+            $('#gate_by_asn').html(result);
             if(callback) callback();
         }
     })
