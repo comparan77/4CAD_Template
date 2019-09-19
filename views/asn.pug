@@ -1,101 +1,102 @@
 extends layout
 
 block content
-  div.row
-    div.col-xl-12.col-lg-12
-      div.card.shadow.mb-4
-        //Card header
-        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          h6.m-0.font-weight-bold.text-primary 1.- Datos Generales
-        //Card body
-        div.card-body
-          div.form-group
-            //- label(for="txt_cliente") Cliente
-            //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
-            select#ddl_cliente.selectpicker.form-control(name="ddl_cliente" aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente")
-          div.form-group
-            select#ddl_almacen.selectpicker.form-control(name="ddl_almacen" aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén")
-          //- div.form-group
-          //-   select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
-          div.form-group
-            label(for="txt_fecha") Fecha de arribo
-            input#txt_fecha.form-control(type="text")
-            input#altTxt_fecha(type="hidden")
-          div.form-group
-            label(for="txt_hora") Hora de arribo
-            input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time')
-  
-    div.col-xl-12.col-lg-12
-      div.card.shadow.mb-4
-        //card header
-        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          div.m-0.font-weight-bold.text-primary 2.- Mercancía
-        div.card-body
-          div.form-group
-            select#ddl_vendor.selectpicker.form-control(name="ddl_vendor" data-live-search="true" data-title="Seleccione un vendor")
-          div.form-group
-            label(for="txt_producto") Producto
-            select#ddl_vendor_mercancia.selectpicker.form-control(name="ddl_vendor_mercancia" data-live-search="true" data-title="Seleccione el producto")
-          div.form-group
-            label(for="txt_bto") Bultos Declarados
-            input#txt_bto.form-control(placeholder='Bultos declarados' type='number')
-          div.form-group
-            label(for="txt_pza") Piezas Declaradas
-            input#txt_pza.form-control(placeholder='Piezas declaradas' type='number')
-  
-  div.row
-    div.col-xl-12.col-lg-12
-      div.card.shadow.mb-4
-        //card header
-        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          div.m-0.font-weight-bold.text-primary 3.- Documentación
-        div.card-body
-          div.form-group
-            select#ddl_documento.selectpicker.form-control(name="ddl_documento" data-live-search="true" data-title="Seleccione documentos")
-          div.form-group
-            label(for="txt_referencia") Referencia
-            input#txt_referencia.form-control(type="text")
-          div.form-group
-            button#add_referencia.btn.btn-secondary(type="button") Agregar Referencia
-          div.form-group
-            div.table-responsive
-              table#tbl_referencia.table.table-bordered(width="100%" style="cellspacing:0")
-                thead
-                  tr
-                    th Documento
-                    th Referencia
-                    th(align="center") Quitar
-                tbody
-  
-    div.col-xl-12.col-lg-12
-      div.card.shadow.mb-4
-        //card header
-        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          div.m-0.font-weight-bold.text-primary 4.- Unidad de transporte
-        div.card-body
-          div.form-group
-            label(for="txt_operador") Operador
-            input#txt_operador.form-control(placeholder='Nombre del Operador' type='text')
-          div.form-group
-            label(for="txt_sello") Sello
-            input#txt_sello.form-control(placeholder='Número de sello' type='text')
-          div.form-group
-            select#ddl_transporte_linea.selectpicker.form-control(name="ddl_transporte_linea" data-live-search="true" data-title="Seleccione una linea de transporte")
-          div.form-group
-            select#ddl_transporte_tipo.selectpicker.form-control(name="ddl_transporte_tipo" data-live-search="true" data-title="Seleccione un tipo de transporte")
-          #datosVehiculo.d-none
-            div#div_placa.form-group
-              label(for="txt_placa") Placa
-              input#txt_placa.form-control(placeholder='Número de placa' type='text')
-            div#div_caja.form-group
-              label(for="txt_caja") Caja
-              input#txt_caja.form-control(placeholder='Número de la caja' type='text')
-            div#div_cont1.form-group
-              label(for="txt_contenedor_1") Contenedor 1
-              input#txt_contenedor-1.form-control(placeholder='Número del contenedor 1' type='text')
-            div#div_cont2.form-group
-              label(for="txt_contenedor_2") Contenedor 2
-              input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
+  form#frm-asn
+    div.row
+      div.col-xl-12.col-lg-12
+        div.card.shadow.mb-4
+          //Card header
+          div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+            h6.m-0.font-weight-bold.text-primary 1.- Datos Generales
+          //Card body
+          div.card-body
+            div.form-group
+              //- label(for="txt_cliente") Cliente
+              //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
+              select#ddl_cliente.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente")
+            div.form-group
+              select#ddl_almacen.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén")
+            //- div.form-group
+            //-   select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
+            div.form-group
+              label(for="txt_fecha") Fecha de arribo
+              input#txt_fecha.form-control(type="text")
+              input#altTxt_fecha(type="hidden")
+            div.form-group
+              label(for="txt_hora") Hora de arribo
+              input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time')
+    
+      div.col-xl-12.col-lg-12
+        div.card.shadow.mb-4
+          //card header
+          div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+            div.m-0.font-weight-bold.text-primary 2.- Mercancía
+          div.card-body
+            div.form-group
+              select#ddl_vendor.selectpicker.form-control(data-live-search="true" data-title="Seleccione un vendor")
+            div.form-group
+              label(for="txt_producto") Producto
+              select#ddl_vendor_mercancia.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto")
+            div.form-group
+              label(for="txt_bto") Bultos Declarados
+              input#txt_bto.form-control(placeholder='Bultos declarados' type='number')
+            div.form-group
+              label(for="txt_pza") Piezas Declaradas
+              input#txt_pza.form-control(placeholder='Piezas declaradas' type='number')
+    
+    div.row
+      div.col-xl-12.col-lg-12
+        div.card.shadow.mb-4
+          //card header
+          div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+            div.m-0.font-weight-bold.text-primary 3.- Documentación
+          div.card-body
+            div.form-group
+              select#ddl_documento.selectpicker.form-control(data-live-search="true" data-title="Seleccione documentos")
+            div.form-group
+              label(for="txt_referencia") Referencia
+              input#txt_referencia.form-control(type="text")
+            div.form-group
+              button#add_referencia.btn.btn-secondary(type="button") Agregar Referencia
+            div.form-group
+              div.table-responsive
+                table#tbl_referencia.table.table-bordered(width="100%" style="cellspacing:0")
+                  thead
+                    tr
+                      th Documento
+                      th Referencia
+                      th(align="center") Quitar
+                  tbody
+    
+      div.col-xl-12.col-lg-12
+        div.card.shadow.mb-4
+          //card header
+          div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+            div.m-0.font-weight-bold.text-primary 4.- Unidad de transporte
+          div.card-body
+            div.form-group
+              label(for="txt_operador") Operador
+              input#txt_operador.form-control(placeholder='Nombre del Operador' type='text')
+            div.form-group
+              label(for="txt_sello") Sello
+              input#txt_sello.form-control(placeholder='Número de sello' type='text')
+            div.form-group
+              select#ddl_transporte_linea.selectpicker.form-control(data-live-search="true" data-title="Seleccione una linea de transporte")
+            div.form-group
+              select#ddl_transporte_tipo.selectpicker.form-control(data-live-search="true" data-title="Seleccione un tipo de transporte")
+            #datosVehiculo.d-none
+              div#div_placa.form-group
+                label(for="txt_placa") Placa
+                input#txt_placa.form-control(placeholder='Número de placa' type='text')
+              div#div_caja.form-group
+                label(for="txt_caja") Caja
+                input#txt_caja.form-control(placeholder='Número de la caja' type='text')
+              div#div_cont1.form-group
+                label(for="txt_contenedor_1") Contenedor 1
+                input#txt_contenedor-1.form-control(placeholder='Número del contenedor 1' type='text')
+              div#div_cont2.form-group
+                label(for="txt_contenedor_2") Contenedor 2
+                input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
  
   .container
     .row

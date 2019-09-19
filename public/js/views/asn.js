@@ -99,7 +99,8 @@ $(document).ready(function() {
      
     request.done(function( data ) {
       alert('El aviso de arribo se guardó exitosamente')
-      $('#add_asn').prop('disabled', false).prop('aria-disabled', false).html('Guardar Aviso de Arribo');
+      //$('#add_asn').prop('disabled', false).prop('aria-disabled', false).html('Guardar Aviso de Arribo');
+      $('#frm-asn').submit();
     });
      
     request.fail(function( jqXHR, textStatus ) {
