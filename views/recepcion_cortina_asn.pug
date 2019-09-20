@@ -1,6 +1,64 @@
 if asn_data != undefined
-  .col-xl-12.col-lg-12
-    .card.shadow.mb-4
-      .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-        h6.m-0.font-weight-bold.text-primary Folio: #{data[0].folio}
-      .card-body
+  .container
+    .row
+      .col
+        .card.shadow.mb-4
+          .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+            h6.m-0.font-weight-bold.text-primary 1.- Datos Generales
+          .card-body
+            div
+              span.font-weight-bold Folio:&nbsp;
+              span.font-weight-normal #{data[0].folio}
+            div
+              span.font-weight-bold Cliente:&nbsp;
+              span.font-weight-normal #{data[0].cliente}
+            div
+              span.font-weight-bold Fecha recepción:&nbsp;
+              span.font-weight-normal #{data[0].fecha_recepcion}
+            div
+              span.font-weight-bold Hora recepción:&nbsp;
+              span.font-weight-normal #{data[0].hora_recepcion}
+      .col
+        .card.shadow.mb-4
+          .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+            h6.m-0.font-weight-bold.text-primary 2.- Mercancía
+          .card-body
+            div
+              span.font-weight-bold Vendor:&nbsp;
+              span.font-weight-normal #{data[0].vendor}
+            div
+              span.font-weight-bold Mercnacía:&nbsp;
+              span.font-weight-normal #{data[0].mercancia}
+            div
+              span.font-weight-bold Bulto(s) Declarad(s):&nbsp;
+              span.font-weight-normal #{data[0].bulto_declarado}
+            div
+              span.font-weight-bold Pieza(s) Declarada(s):&nbsp;
+              span.font-weight-normal #{data[0].pieza_declarada}
+    .row
+      .col
+        .card.shadow.mb-4
+          .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+            h6.m-0.font-weight-bold.text-primary 3.- Documentación
+          .card-body
+            each doc in data[0].lstDoc
+              div
+                span.font-weight-bold #{doc.Documento}:&nbsp;
+                span.font-weight-normal #{doc.Referencia}
+      .col
+        .card.shadow.mb-4
+          .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+            h6.m-0.font-weight-bold.text-primary 4.- Transporte
+          .card-body
+            div
+              span.font-weight-bold Operador:&nbsp;
+              span.font-weight-normal #{data[0].operador}
+            div
+              span.font-weight-bold Sello:&nbsp;
+              span.font-weight-normal #{data[0].sello}
+            div
+              span.font-weight-bold Linea:&nbsp;
+              span.font-weight-normal #{data[0].linea}
+            div
+              span.font-weight-bold Tipo:&nbsp;
+              span.font-weight-normal #{data[0].tipo}

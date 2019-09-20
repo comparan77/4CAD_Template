@@ -76,7 +76,7 @@ function udt_rec_cortina_alm(id_almacen, callback) {
             $('.asn_r_id').each(function() {
                 $(this).click(() => {
                     var id_asn_recepcion = $(this).prop('id').split('_')[2];
-                    
+                    $('#gate').html($('#div_asn_' + id_asn_recepcion).children('input').val());
                     fillAsnData(id_asn_recepcion, () => {
                         $('#gates_by_warehose').addClass('d-none');
                         $('#gates').addClass('d-none')
