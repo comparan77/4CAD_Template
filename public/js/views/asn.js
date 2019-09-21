@@ -58,54 +58,9 @@ $(document).ready(function() {
     fillVendor_mercancia($('#ddl_vendor').val());
   });
 
-  $('#add_asn').click(() => {
+  $('#add_asn_').click(() => {
 
-    $('#add_asn').prop('disabled', true).prop('aria-disabled', true).html('Guardando ASN...');
-
-    var lDoc = [];
-    for(var i in lstDoc) {
-      lDoc.push({
-        Id_documento: lstDoc[i].id,
-        Referencia: lstDoc[i].valor
-      });
-    }
-
-    var oAsn = {
-      Id_cliente: $('#ddl_cliente').val(),
-      Id_almacen: $('#ddl_almacen').val(),
-      Fecha_arribo: $('#altTxt_fecha').val(),
-      Hora_arribo: $('#txt_hora').val(),
-      Id_mercancia_vendor: $('#ddl_vendor_mercancia').val(),
-      Bulto_declarado: $('#txt_bto').val(),
-      Pieza_declarada: $('#txt_pza').val(),
-      Operador: $('#txt_operador').val(),
-      Sello: $('#txt_sello').val(),
-      Id_transporte_linea: $('#ddl_transporte_linea').val(),
-      Id_transporte_tipo: $('#ddl_transporte_tipo').val(),
-      Placa: $('#txt_placa').val(),
-      Caja: $('#txt_caja').val(),
-      Cont_1: $('#txt_contenedor-1').val(),
-      Cont_2: $('#txt_contenedor-2').val(),
-      lstDoc: lDoc
-    };
-
-    var request = $.ajax({
-      url: "http://localhost:3002/asn",
-      method: "POST",
-      data: JSON.stringify(oAsn),
-      contentType: "application/json",
-      // dataType: 'json'
-    });
-     
-    request.done(function( data ) {
-      alert('El aviso de arribo se guardó exitosamente')
-      //$('#add_asn').prop('disabled', false).prop('aria-disabled', false).html('Guardar Aviso de Arribo');
-      $('#frm-asn').submit();
-    });
-     
-    request.fail(function( jqXHR, textStatus ) {
-      alert( "Request failed: " + textStatus );
-    });
+    
 
     // $.post("http://localhost:3002/asn", JSON.stringify(oAsn), function(data) {
     //   console.log(JSON.stringify(data));
@@ -193,3 +148,74 @@ function setFormTransporteTipo() {
   if($('#ddl_transporte_tipo  option:selected').attr('cont_2')=='1')
     $('#div_cont2').removeClass('d-none');
 }
+
+function saveAsn() {
+  $('#add_asn').prop('disabled', true).prop('aria-disabled', true).html('Guardando ASN...');
+
+    var lDoc = [];
+    for(var i in lstDoc) {
+      lDoc.push({
+        Id_documento: lstDoc[i].id,
+        Referencia: lstDoc[i].valor
+      });
+    }
+
+    var oAsn = {
+      Id_cliente: $('#ddl_cliente').val(),
+      Id_almacen: $('#ddl_almacen').val(),
+      Fecha_arribo: $('#altTxt_fecha').val(),
+      Hora_arribo: $('#txt_hora').val(),
+      Id_mercancia_vendor: $('#ddl_vendor_mercancia').val(),
+      Bulto_declarado: $('#txt_bto').val(),
+      Pieza_declarada: $('#txt_pza').val(),
+      Operador: $('#txt_operador').val(),
+      Sello: $('#txt_sello').val(),
+      Id_transporte_linea: $('#ddl_transporte_linea').val(),
+      Id_transporte_tipo: $('#ddl_transporte_tipo').val(),
+      Placa: $('#txt_placa').val(),
+      Caja: $('#txt_caja').val(),
+      Cont_1: $('#txt_contenedor-1').val(),
+      Cont_2: $('#txt_contenedor-2').val(),
+      lstDoc: lDoc
+    };
+
+    var request = $.ajax({
+      url: "http://localhost:3002/asn",
+      method: "POST",
+      data: JSON.stringify(oAsn),
+      contentType: "application/json",
+      // dataType: 'json'
+    });
+     
+    request.done(function( data ) {
+      alert('El aviso de arribo se guardó exitosamente')
+      //$('#add_asn').prop('disabled', false).prop('aria-disabled', false).html('Guardar Aviso de Arribo');
+      $('#frm-asn').submit();
+    });
+     
+    request.fail(function( jqXHR, textStatus ) {
+      alert( "Request failed: " + textStatus );
+    });
+}
+
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        } else {
+          event.preventDefault();
+          event.stopPropagation();
+          saveAsn();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();

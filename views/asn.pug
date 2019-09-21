@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  form#frm-asn
+  form#frm-asn.needs-validation(novalidate)
     div.row
       div.col-xl-12.col-lg-12
         div.card.shadow.mb-4
@@ -13,18 +13,18 @@ block content
             div.form-group
               //- label(for="txt_cliente") Cliente
               //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
-              select#ddl_cliente.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente")
+              select#ddl_cliente.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente" required)
             div.form-group
-              select#ddl_almacen.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén")
+              select#ddl_almacen.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén" required)
             //- div.form-group
             //-   select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
             div.form-group
               label(for="txt_fecha") Fecha de arribo
-              input#txt_fecha.form-control(type="text")
+              input#txt_fecha.form-control(type="text" required)
               input#altTxt_fecha(type="hidden")
             div.form-group
               label(for="txt_hora") Hora de arribo
-              input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time')
+              input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time' required)
     
       div.col-xl-12.col-lg-12
         div.card.shadow.mb-4
@@ -98,8 +98,8 @@ block content
                 label(for="txt_contenedor_2") Contenedor 2
                 input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
  
-  .container
-    .row
-      .col-md-3.offset-md-9
-        .form-group
-          button#add_asn.btn.btn-primary(type="button") Guardar Aviso de Arribo
+    .container
+      .row
+        .col-md-3.offset-md-9
+          .form-group
+            button#add_asn.btn.btn-primary(type="submit") Guardar Aviso de Arribo
