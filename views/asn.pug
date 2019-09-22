@@ -13,7 +13,7 @@ block content
             div.form-group
               //- label(for="txt_cliente") Cliente
               //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
-              select#ddl_cliente.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente" required)
+              select#ddl_cliente.selectpicker.form-control.custom-select(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente" required)
             div.form-group
               select#ddl_almacen.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén" required)
             //- div.form-group
@@ -33,16 +33,16 @@ block content
             div.m-0.font-weight-bold.text-primary 2.- Mercancía
           div.card-body
             div.form-group
-              select#ddl_vendor.selectpicker.form-control(data-live-search="true" data-title="Seleccione un vendor")
+              select#ddl_vendor.selectpicker.form-control(data-live-search="true" data-title="Seleccione un vendor" required)
             div.form-group
               label(for="txt_producto") Producto
-              select#ddl_vendor_mercancia.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto")
+              select#ddl_vendor_mercancia.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto" required)
             div.form-group
               label(for="txt_bto") Bultos Declarados
-              input#txt_bto.form-control(placeholder='Bultos declarados' type='number')
+              input#txt_bto.form-control(placeholder='Bultos declarados' type='number' required)
             div.form-group
               label(for="txt_pza") Piezas Declaradas
-              input#txt_pza.form-control(placeholder='Piezas declaradas' type='number')
+              input#txt_pza.form-control(placeholder='Piezas declaradas' type='number' required)
     
     div.row
       div.col-xl-12.col-lg-12
