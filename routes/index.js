@@ -49,8 +49,11 @@ router.get('/recepcion_cortina_asn/:id', (req, res, next)=> {
 
 /* Almacenamiento. */
 router.get('/almacenamiento', (req, res, next) => {
-  res.render('almacenamiento', { title: 'Almacenamiento', option: 'almacenamiento', needTbl: true });
-});
+  request('http://localhost:3002/almacen_zona', (error, response, body) => {
+    data = JSON.parse(body)
+    res.render('almacenamiento', { title: 'Almacenamiento', option: 'almacenamiento', needTbl: true, lstAlmZona: data })
+  })
+})
 
 /* Inventario. */
 router.get('/inventario', (req, res, next) => {

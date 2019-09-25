@@ -3,3 +3,23 @@ extends layout
 block content
 
   p #{message}
+  ul#myTab.nav.nav-tabs(role="tablist")
+    li.nav-item
+      a#layout-tab.nav-link.active(data-toggle="tab" href="#layout" role="tab" aria-controls="layout" aria-selected="true") Layout
+    li.nav-item
+      a#receiving-tab.nav-link(data-toggle="tab" href="#receiving" role="tab" aria-controls="receiving" aria-selected="false") Inventario
+  .tab-content
+    #layout.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="layout-tab") 
+      .container(style="margin-top: 20px")
+        .row
+          each item in lstAlmZona
+              .col-xl-3.col-md-6.mb-4
+                .card.border-left-primary.shadow.h-100.py-2
+                  .card-body
+                    .row.no-gutters.align-items-center
+                      .col.mr-2.card-warehouse(id='div_almacen_' + item.id)
+                        .text-xs.font-weight-bold.text-uppercase.mb-1 #{item.almacen}
+                        .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Zonas 
+                          .span.d-inline-block #{item.zonas}
+    #receiving.tab-pane.fade(role="tabpanel" aria-labelledby="receiving-tab") 
+      .container(style="margin-top: 20px") inventario
