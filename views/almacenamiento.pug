@@ -5,11 +5,13 @@ block content
   p #{message}
   ul#myTab.nav.nav-tabs(role="tablist")
     li.nav-item
-      a#layout-tab.nav-link.active(data-toggle="tab" href="#layout" role="tab" aria-controls="layout" aria-selected="true") Layout
+      a#location-tab.nav-link.active(data-toggle="tab" href="#location" role="tab" aria-controls="location" aria-selected="true") Ubicación
     li.nav-item
-      a#receiving-tab.nav-link(data-toggle="tab" href="#receiving" role="tab" aria-controls="receiving" aria-selected="false") Inventario
+      a#layout-tab.nav-link(data-toggle="tab" href="#layout" role="tab" aria-controls="layout" aria-selected="false") Layout
   .tab-content
-    #layout.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="layout-tab") 
+    #location.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="location-tab") 
+      .container(style="margin-top: 20px") Ubicación
+    #layout.tab-pane.fade(role="tabpanel" aria-labelledby="layout-tab") 
       .container(style="margin-top: 20px")
         .row
           each item in lstAlmZona
@@ -21,5 +23,4 @@ block content
                         .text-xs.font-weight-bold.text-uppercase.mb-1 #{item.almacen}
                         .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Zonas 
                           .span.d-inline-block #{item.zonas}
-    #receiving.tab-pane.fade(role="tabpanel" aria-labelledby="receiving-tab") 
-      .container(style="margin-top: 20px") inventario
+    
