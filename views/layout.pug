@@ -41,8 +41,8 @@ html(lang='es_MX')
         //Divider
         hr.sidebar-divider.my-0
         //Nav Item - Dashboard
-        li.nav-item
-          a.nav-link(href='#')
+        li.nav-item(class=(option=="dashboard"?'active':''))
+          a.nav-link(href='dashboard')
             i.fas.fa-fw.fa-tachometer-alt
             span Dashboard
         //Divider
@@ -50,22 +50,18 @@ html(lang='es_MX')
         //Heading
         div.sidebar-heading Operación
         //Nav Item
-        li.nav-item(class=(option=="asn"?'active':''))
-          a.nav-link(href='asn')
-            i.fas.fa-fw.fa-calendar
-            span ASN
         li.nav-item(class=(option=="recepcion"?'active':''))
           a.nav-link(href='recepcion')
             i.fas.fa-fw.fa-arrow-right
             span Recepción
-        li.nav-item(class=(option=="almacenamiento"?'active':''))
-          a.nav-link(href='almacenamiento')
+        li.nav-item(class=(option=="ubicacion"?'active':''))
+          a.nav-link(href='ubicacion')
             i.fas.fa-fw.fa-boxes
-            span Almacenamiento
-        li.nav-item(class=(option=="inventario"?'active':''))
-          a.nav-link(href='inventario')
+            span Ubicación
+        li.nav-item(class=(option=="preparacion"?'active':''))
+          a.nav-link(href='preparacion')
             i.fas.fa-fw.fa-clipboard-check
-            span Inventario
+            span Preparacion
         li.nav-item(class=(option=="expedicion"?'active':''))
           a.nav-link(href='expedicion')
             i.fas.fa-fw.fa-arrow-left

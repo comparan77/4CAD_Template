@@ -8,16 +8,22 @@ block styles
 block content
 
   p #{message}
-  .form-group
-    select#ddl_cliente.selectpicker.form-control(data-live-search="true" data-style="btn-primary" data-title="Seleccione un cliente")
-      option(selected value="") Todos los clientes
   ul#myTab.nav.nav-tabs(role="tablist")
     li.nav-item
-      a#schedule-tab.nav-link.active(data-toggle="tab" href="#schedule" role="tab" aria-controls="schedule" aria-selected="true") En calendario
+      a#asn-tab.nav-link.active(data-toggle="tab" href="#asn" role="tab" aria-controls="asn" aria-selected="true") ASN
     li.nav-item
-      a#receiving-tab.nav-link(data-toggle="tab" href="#receiving" role="tab" aria-controls="receiving" aria-selected="false") En recepción
+      a#schedule-tab.nav-link(data-toggle="tab" href="#schedule" role="tab" aria-controls="schedule" aria-selected="false") Calendario
+    li.nav-item
+      a#receiving-tab.nav-link(data-toggle="tab" href="#receiving" role="tab" aria-controls="receiving" aria-selected="false") Descarga
   .tab-content
-    #schedule.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="schedule-tab")
+    #asn.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="schedule-tab")
+      .container(style="margin-top: 20px")
+        include asn.pug
+    #schedule.tab-pane.fade(role="tabpanel" aria-labelledby="schedule-tab")
+      .container(style="margin-top: 20px")
+        .form-group
+          select#ddl_cliente_schedule.selectpicker.form-control(data-live-search="true" data-style="btn-primary" data-title="Seleccione un cliente")
+            option(selected value="") Todos los clientes
       #calendar
     #receiving.tab-pane.fade(role="tabpanel" aria-labelledby="receiving-tab") 
       .container(style="margin-top: 20px")

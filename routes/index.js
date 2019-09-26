@@ -4,24 +4,33 @@ var request = require('request');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('asn', { title: 'Aviso de Arribos', option: 'asn', needTbl: true });
+  initDashboard(res)
 });
 
+/* Dashboard. */
+router.get('/dashboard', (req, res, next) => {
+  initDashboard(res)
+});
+
+/* Recepcion. */
 /* ASN. */
 router.get('/asn', (req, res, next) => {
   res.render('asn', { title: 'Aviso de Arribos', option: 'asn', needTbl: true });
 });
 
-/* Recepcion. */
 router.get('/recepcion', (req, res, next) => {
   request('http://localhost:3002/asn_rec_cortina', (error, response, body) => {
     // console.log('error:', error); // Print the error if one occurred
     // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     // console.log('body:', body); // Print the HTML for the Google homepage.
     // console.log(JSON.parse(body));
-    res.render('recepcion', { title: 'Recepción de Mercancía', option: 'recepcion' , arrAsnRecCor: JSON.parse(body)});
+    res.render('recepcion', { title: 'Recepción de Mercancía', option: 'recepcion', needTbl: true, arrAsnRecCor: JSON.parse(body)});
   });
 });
+
+function initDashboard(res) {
+  res.render('dashboard', { title: 'Dashboard', option: 'dashboard', needTbl: true });
+}
 
 router.get('/recepcion_cortina/:id', (req, res, next)=> {
   request('http://localhost:3002/asn_rec_cortina/' + req.params.id, (error, response, body) => {
@@ -47,17 +56,17 @@ router.get('/recepcion_cortina_asn/:id', (req, res, next)=> {
   }) */
 
 
-/* Almacenamiento. */
-router.get('/almacenamiento', (req, res, next) => {
+/* Ubicacion. */
+router.get('/ubicacion', (req, res, next) => {
   request('http://localhost:3002/almacen_zona', (error, response, body) => {
     data = JSON.parse(body)
-    res.render('almacenamiento', { title: 'Almacenamiento', option: 'almacenamiento', needTbl: true, lstAlmZona: data })
+    res.render('ubicacion', { title: 'Ubicacion', option: 'ubicacion', needTbl: true, lstAlmZona: data })
   })
 })
 
-/* Inventario. */
-router.get('/inventario', (req, res, next) => {
-  res.render('inventario', { title: 'Inventario', option: 'inventario' });
+/* Preparacion. */
+router.get('/preparacion', (req, res, next) => {
+  res.render('preparacion', { title: 'Preparacion', option: 'preparacion' });
 });
 
 /* Expedicion. */
