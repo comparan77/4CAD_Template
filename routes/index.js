@@ -64,6 +64,14 @@ router.get('/ubicacion', (req, res, next) => {
   })
 })
 
+router.get('/ubicacion_zona/:id_almacen', (req, res, next) => {
+  request('http://localhost:3002/almacen_zona/' + req.params.id_almacen, (error, response, body) => {
+    data = JSON.parse(body)
+    console.log(data);
+    res.render('ubicacion_zona', { lstZona: data })
+  })
+})
+
 /* Preparacion. */
 router.get('/preparacion', (req, res, next) => {
   res.render('preparacion', { title: 'Preparacion', option: 'preparacion' });
