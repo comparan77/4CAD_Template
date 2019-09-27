@@ -17,6 +17,8 @@ if lstZona != undefined
                 .col.mr-2.card-zona(id='div_zona_' + item.Id)
                   .text-xs.font-weight-bold.text-uppercase.mb-1 #{item.Nombre}
                   .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Clave: 
-                    .span.d-inline-block #{item.Clave}
+                    .span.d-inline-block.font-weight-normal #{item.Clave}
+                  .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cod:&nbsp;&nbsp;&nbsp;
+                     .span.d-inline-block.font-weight-normal #{item.Tipo}
     else
-      p El almacén seleccionado no cuenta con zonas
+      p Ups! parace que el almacén seleccionado no cuenta con zonas asignadas, por favor contacta de imnediato al ejecutivo.
