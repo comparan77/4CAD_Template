@@ -35,6 +35,9 @@ form#frm-asn.needs-validation(novalidate)
             label(for="txt_producto") Producto
             select#ddl_vendor_mercancia.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto" required)
           div.form-group
+            label(for="txt_tar") Tarimas Declaradas
+            input#txt_tar.form-control(placeholder='Tarimas declaradas' type='number')
+          div.form-group
             label(for="txt_bto") Bultos Declarados
             input#txt_bto.form-control(placeholder='Bultos declarados' type='number' required)
           div.form-group

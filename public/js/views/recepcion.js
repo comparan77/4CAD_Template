@@ -6,6 +6,9 @@ var arrAsnRecCor = [];
 var to_udt_cortina;
 var to_udt_cortina_alm;
 
+var isScheduleInit = false;
+var istReceivingInit = false;
+
 $(document).ready(function() {
     init();
     initASN();
@@ -23,9 +26,17 @@ function init() {
         // e.relatedTarget // previous active tab
         switch (e.target.id) {
             case 'schedule-tab':
-                initSchedule();
+                if(!isScheduleInit) {
+                  initSchedule();
+                  isScheduleInit = true;
+                }
                 break;
-        
+            case 'receiving-tab':
+                if(!istReceivingInit) {
+                  initReceiving();
+                  istReceivingInit = true;
+                }
+              break;
             default:
                 break;
         }
@@ -181,6 +192,7 @@ function fillDoc() {
         Fecha_arribo: $('#altTxt_fecha').val(),
         Hora_arribo: $('#txt_hora').val(),
         Id_mercancia_vendor: $('#ddl_vendor_mercancia').val(),
+        Tarima_declarada: $('#txt_tar').val(), 
         Bulto_declarado: $('#txt_bto').val(),
         Pieza_declarada: $('#txt_pza').val(),
         Operador: $('#txt_operador').val(),
@@ -254,20 +266,26 @@ function initSchedule() {
             
         })
     }); */
-    $('.card-warehouse').each(function() {
-        $(this).click(() => {
-            var id_almacen = $(this).attr('id').split('_')[2];
-            if(to_udt_cortina != undefined)
-                clearTimeout(to_udt_cortina);
-                to_udt_cortina = undefined;
-            udt_rec_cortina_alm(id_almacen, () => {
-                $('#div_cortina').removeClass('d-none');
-                $('#div-almacenes').addClass('d-none');
-            })
+    
+}
+
+function initReceiving() {
+
+  $('.card-warehouse').each(function() {
+    $(this).click(() => {
+        var id_almacen = $(this).attr('id').split('_')[2];
+        if(to_udt_cortina != undefined)
+            clearTimeout(to_udt_cortina);
+            to_udt_cortina = undefined;
+        udt_rec_cortina_alm(id_almacen, () => {
+            $('#div_cortina').removeClass('d-none');
+            $('#div-almacenes').addClass('d-none');
         })
     })
+})
 
-    udt_rec_cortina();
+udt_rec_cortina();
+
 }
 
 function udt_rec_cortina() {
