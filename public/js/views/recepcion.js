@@ -99,7 +99,7 @@ function initASN() {
   });
 
   $('#ddl_vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-    fillVendor_mercancia($('#ddl_vendor').val());
+    fillVendor_producto($('#ddl_vendor').val());
   });
 
 }
@@ -148,13 +148,13 @@ function fillDoc() {
     });
   }
   
-  function fillVendor_mercancia(id) {
-    $('#ddl_vendor_mercancia').html('');
-    $.getJSON("http://localhost:3002/vendor_mercancia/" + id, function(data) {
+  function fillVendor_producto(id) {
+    $('#ddl_vendor_producto').html('');
+    $.getJSON("http://localhost:3002/vendor_producto/" + id, function(data) {
         $.each(data, (key,val) =>  { 
-          $('#ddl_vendor_mercancia').append('<option value="' + val.Id + '">' + val.Nombre + '</option>')
+          $('#ddl_vendor_producto').append('<option value="' + val.Id + '">' + val.Nombre + '</option>')
       });
-      $('#ddl_vendor_mercancia').selectpicker('refresh');
+      $('#ddl_vendor_producto').selectpicker('refresh');
     });
   }
   
@@ -191,7 +191,7 @@ function fillDoc() {
         Id_almacen: $('#ddl_almacen').val(),
         Fecha_arribo: $('#altTxt_fecha').val(),
         Hora_arribo: $('#txt_hora').val(),
-        Id_mercancia_vendor: $('#ddl_vendor_mercancia').val(),
+        Id_vendor_producto: $('#ddl_vendor_producto').val(),
         Tarima_declarada: $('#txt_tar').val(), 
         Bulto_declarado: $('#txt_bto').val(),
         Pieza_declarada: $('#txt_pza').val(),

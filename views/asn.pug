@@ -27,13 +27,13 @@ form#frm-asn.needs-validation(novalidate)
       div.card.shadow.mb-4
         //card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          div.m-0.font-weight-bold.text-primary 2.- Mercancía
+          div.m-0.font-weight-bold.text-primary 2.- Producto
         div.card-body
           div.form-group
             select#ddl_vendor.selectpicker.form-control(data-live-search="true" data-title="Seleccione un vendor" required)
           div.form-group
             label(for="txt_producto") Producto
-            select#ddl_vendor_mercancia.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto" required)
+            select#ddl_vendor_producto.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto" required)
           div.form-group
             label(for="txt_tar") Tarimas Declaradas
             input#txt_tar.form-control(placeholder='Tarimas declaradas' type='number')

@@ -24,7 +24,7 @@ router.get('/recepcion', (req, res, next) => {
     // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     // console.log('body:', body); // Print the HTML for the Google homepage.
     // console.log(JSON.parse(body));
-    res.render('recepcion', { title: 'Recepción de Mercancía', option: 'recepcion', needTbl: true, arrAsnRecCor: JSON.parse(body)});
+    res.render('recepcion', { title: 'Recepción de Producto', option: 'recepcion', needTbl: true, arrAsnRecCor: JSON.parse(body)});
   });
 });
 

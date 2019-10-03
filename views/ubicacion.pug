@@ -5,12 +5,12 @@ block content
   p #{message}
   ul#myTab.nav.nav-tabs(role="tablist")
     li.nav-item
-      a#inventory-tab.nav-link.active(data-toggle="tab" href="#inventory" role="tab" aria-controls="inventory" aria-selected="true") Inventario
+      a#recibed-tab.nav-link.active(data-toggle="tab" href="#recibed" role="tab" aria-controls="recibed" aria-selected="true") Recibidos
     li.nav-item
       a#layout-tab.nav-link(data-toggle="tab" href="#layout" role="tab" aria-controls="layout" aria-selected="false") Layout
   .tab-content
-    #inventory.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="inventory-tab") 
-      .container(style="margin-top: 20px") Inventario
+    #recibed.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="recibed-tab") 
+      .container(style="margin-top: 20px") Recibidos
     #layout.tab-pane.fade(role="tabpanel" aria-labelledby="layout-tab") 
       .container(style="margin-top: 20px")
         #div-almacen.row
