@@ -1,0 +1,24 @@
+nav(aria-label="breadcrumb")
+  ol.breadcrumb
+    li.breadcrumb-item
+      a#lnk_selected_warehouse(href="#") Almacenes
+    li#gates.breadcrumb-item.active(aria-current="page")
+    li#gates_selected.d-none.breadcrumb-item(href="#")
+      a#lnk_selected_gate(href="#") #{almacen}
+    li#gate.d-none.breadcrumb-item.active(aria-current="page") Zona x
+if lstZona != undefined
+  .row#zonaByWarehouse
+    if lstZona.length > 0
+      each item in lstZona
+        .col-xl-3.col-md-6.mb-4
+          .card.shadow.h-100.py-2.border-left-success
+            .card-body
+              .row.no-gutters.align-items-center
+                .col.mr-2.card-zona(id='div_zona_' + item.Id)
+                  .text-xs.font-weight-bold.text-uppercase.mb-1 #{item.Nombre}
+                  .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Clave: 
+                    .span.d-inline-block.font-weight-normal #{item.Clave}
+                  .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Cod:&nbsp;&nbsp;&nbsp;
+                     .span.d-inline-block.font-weight-normal #{item.Tipo}
+    else
+      p Al parecer el almacén seleccionado no cuenta con zonas asignadas, por favor contacte de imnediato a su ejecutivo.

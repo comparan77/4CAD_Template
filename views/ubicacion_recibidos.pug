@@ -1,0 +1,43 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Folio</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Tarimas</th>
+            <th>Cajas</th>
+            <th>Piezas</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Folio</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Tarimas</th>
+            <th>Cajas</th>
+            <th>Piezas</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          if lstRec != undefined
+            each item in lstRec
+              <tr>
+                <td>#{item.Folio}</td>
+                <td>#{item.Cliente}</td>
+                <td>#{item.Producto}</td>
+                <td>#{item.Tarimas}</td>
+                <td>#{item.Cajas}</td>
+                <td>#{item.Piezas}</td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -10,19 +10,11 @@ block content
       a#layout-tab.nav-link(data-toggle="tab" href="#layout" role="tab" aria-controls="layout" aria-selected="false") Layout
   .tab-content
     #recibed.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="recibed-tab") 
-      .container(style="margin-top: 20px") Recibidos
+      .container(style="margin-top: 20px")
+        include ubicacion_recibidos.pug
     #layout.tab-pane.fade(role="tabpanel" aria-labelledby="layout-tab") 
       .container(style="margin-top: 20px")
-        #div-almacen.row
-          each item in lstAlmZona
-              .col-xl-3.col-md-6.mb-4
-                .card.border-left-primary.shadow.h-100.py-2
-                  .card-body
-                    .row.no-gutters.align-items-center
-                      .col.mr-2.card-warehouse(id='div_almacen_' + item.id)
-                        .text-xs.font-weight-bold.text-uppercase.mb-1 #{item.almacen}
-                        .h6.mb-0.text-monospace.font-weight-bold.text-gray-800 Zonas: 
-                          .span.d-inline-block.font-weight-normal #{item.zonas}
-                      input(type="hidden" value=item.almacen)
+        #div-layout
+          include ubicacion_zona.pug
         #div-zonas.d-none
           include ubicacion_zona.pug

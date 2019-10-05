@@ -58,16 +58,23 @@ router.get('/recepcion_cortina_asn/:id', (req, res, next)=> {
 
 /* Ubicacion. */
 router.get('/ubicacion', (req, res, next) => {
-  request('http://localhost:3002/almacen_zona', (error, response, body) => {
+  request('http://localhost:3002/recibidos', (error, response, body) => {
     data = JSON.parse(body)
-    res.render('ubicacion', { title: 'Ubicacion', option: 'ubicacion', needTbl: true, lstAlmZona: data })
+    res.render('ubicacion', { title: 'Ubicacion', option: 'ubicacion', needTbl: true, lstRec: data })
   })
 })
 
-router.get('/ubicacion_zona/:id_almacen', (req, res, next) => {
+router.get('/ubicacion_zona', (req, res, next) => {
+  request('http://localhost:3002/almacen_zona', (error, response, body) => {
+    data = JSON.parse(body)
+    res.render('ubicacion_zona', { lstAlmZona: data })
+  })
+})
+
+router.get('/ubicacion_zona_sel/:id_almacen', (req, res, next) => {
   request('http://localhost:3002/almacen_zona/' + req.params.id_almacen, (error, response, body) => {
     data = JSON.parse(body)
-    res.render('ubicacion_zona', { lstZona: data })
+    res.render('ubicacion_zona_sel', { lstZona: data })
   })
 })
 
