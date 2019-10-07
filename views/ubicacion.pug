@@ -11,10 +11,11 @@ block content
   .tab-content
     #recibed.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="recibed-tab") 
       .container(style="margin-top: 20px")
-        include ubicacion_recibidos.pug
+        #div-recibidos
+          include ubicacion_recibidos.pug
+        #div-recibido.d-none
     #layout.tab-pane.fade(role="tabpanel" aria-labelledby="layout-tab") 
       .container(style="margin-top: 20px")
         #div-layout
-          include ubicacion_zona.pug
         #div-zonas.d-none
-          include ubicacion_zona.pug
+          
