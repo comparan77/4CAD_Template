@@ -11,8 +11,9 @@
             <th>Cliente</th>
             <th>Producto</th>
             <th>Tarimas</th>
-            <th>Cajas</th>
-            <th>Piezas</th>
+            <th>Ubicado(s)</th>
+            <th>Pendiente(s)</th>
+            <th>% Ubicados</th>
           </tr>
         </thead>
         <tfoot>
@@ -21,8 +22,9 @@
             <th>Cliente</th>
             <th>Producto</th>
             <th>Tarimas</th>
-            <th>Cajas</th>
-            <th>Piezas</th>
+            <th>Ubicado(s)</th>
+            <th>Pendiente(s)</th>
+            <th>% Ubicados</th>
           </tr>
         </tfoot>
         <tbody>
@@ -30,12 +32,16 @@
             each item in lstRec
               <tr>
                 <td>
-                  a.nav-lingk(href="#") #{item.Folio}</td>
+                  a.nav-lingk.folio-ent(href="#") 
+                    span #{item.Folio}
+                  input(type="hidden" value='key_' + item.Id_entrada)
+                </td>
                 <td>#{item.Cliente}</td>
                 <td>#{item.Producto}</td>
                 <td>#{item.Tarimas}</td>
-                <td>#{item.Cajas}</td>
-                <td>#{item.Piezas}</td>
+                <td>#{item.Ubicados}</td>
+                <td>#{item.Pendientes}</td>
+                <td>#{item.Ubicados / item.Tarimas * 100}</td>
               </tr>
         </tbody>
       </table>

@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 function init() {
 
-    $('#dataTable').DataTable();
+    initRecived();
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         switch (e.target.id) {
@@ -16,14 +16,38 @@ function init() {
                   isLayoutInit = true;
                 }
                 break;
-            case 'receiving-tab':
-                if(!istReceivingInit) {
-                  initReceiving();
-                  istReceivingInit = true;
-                }
-              break;
             default:
                 break;
+        }
+    })
+
+}
+
+function initRecived() {
+    
+    $.ajax({
+        url: 'http://localhost:3001/ubicacion_recibidos/',
+        success: function(result) {
+            
+            $('#div-recibidos').html(result);
+            
+            $('#dataTable').DataTable();
+
+            $('#lnk_all').click(()=> {
+                $('#div-recibidos').removeClass('d-none');
+                $('#div-recibido').addClass('d-none');
+                return false;
+            });
+            $('.folio-ent').each(function() {
+                $(this).click(()=> {
+                    var id_entrada = $(this).next().val().split('_')[1];
+                    var folio = $(this).children('span').html();
+                    $('#div-recibidos').addClass('d-none');
+                    $('#div-recibido').removeClass('d-none');
+                    $('#selected_ent').html(folio);
+                    return false;
+                })
+            })
         }
     })
 

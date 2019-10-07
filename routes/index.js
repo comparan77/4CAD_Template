@@ -58,9 +58,13 @@ router.get('/recepcion_cortina_asn/:id', (req, res, next)=> {
 
 /* Ubicacion. */
 router.get('/ubicacion', (req, res, next) => {
+    res.render('ubicacion', { title: 'Ubicacion', option: 'ubicacion', needTbl: true })
+})
+
+router.get('/ubicacion_recibidos', (req, res, next) => {
   request('http://localhost:3002/recibidos', (error, response, body) => {
     data = JSON.parse(body)
-    res.render('ubicacion', { title: 'Ubicacion', option: 'ubicacion', needTbl: true, lstRec: data })
+    res.render('ubicacion_recibidos', { lstRec: data })
   })
 })
 
