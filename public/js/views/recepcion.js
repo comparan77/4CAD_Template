@@ -193,7 +193,7 @@ function fillDoc() {
         Hora_arribo: $('#txt_hora').val(),
         Id_vendor_producto: $('#ddl_vendor_producto').val(),
         Tarima_declarada: $('#txt_tar').val(), 
-        Bulto_declarado: $('#txt_bto').val(),
+        Caja_declarada: $('#txt_cja').val(),
         Pieza_declarada: $('#txt_pza').val(),
         Operador: $('#txt_operador').val(),
         Sello: $('#txt_sello').val(),
