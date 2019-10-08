@@ -1,50 +1,38 @@
-<div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-  </div>
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Folio</th>
-            <th>Cliente</th>
-            <th>Producto</th>
-            <th>Tarimas</th>
-            <th>Ubicado(s)</th>
-            <th>Pendiente(s)</th>
-            <th>% Ubicados</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <th>Folio</th>
-            <th>Cliente</th>
-            <th>Producto</th>
-            <th>Tarimas</th>
-            <th>Ubicado(s)</th>
-            <th>Pendiente(s)</th>
-            <th>% Ubicados</th>
-          </tr>
-        </tfoot>
-        <tbody>
+.card.shadow.mb-4
+  .card-header.py-3
+    h6.m-0.font-weight-bold.text-primary Recibidos por ubicar
+  .card-body
+    .table-responsive
+      table.table.table-bordered(id="dataTable" width="100%" cellspacing="0")
+        thead
+          tr
+            th Folio
+            th Cliente
+            th Producto
+            th Tarimas
+            th Ubicado(s)
+            th Pendiente(s)
+            th % Ubicados
+        tfoot
+          tr
+            th Folio
+            th Cliente
+            th Producto
+            th Tarimas
+            th Ubicado(s)
+            th Pendiente(s)
+            th % Ubicados
+        tbody
           if lstRec != undefined
             each item in lstRec
-              <tr>
-                <td>
+              tr
+                td
                   a.nav-lingk.folio-ent(href="#") 
                     span #{item.Folio}
                   input(type="hidden" value='key_' + item.Id_entrada)
-                </td>
-                <td>#{item.Cliente}</td>
-                <td>#{item.Producto}</td>
+                td #{item.Cliente}
+                td #{item.Producto}
                 td.text-center #{item.Tarimas}
                 td.text-center #{item.Ubicados}
                 td.text-center #{item.Pendientes}
                 td.text-center #{item.Ubicados / item.Tarimas * 100}
-              </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
