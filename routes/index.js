@@ -68,6 +68,13 @@ router.get('/ubicacion_recibidos', (req, res, next) => {
   })
 })
 
+router.get('/ubicacion_recibido/:key', (req, res, next) => {
+  request('http://localhost:3002/entrada_producto/' + req.params.key, (error, response, body) => {
+    data = JSON.parse(body)
+    res.render('ubicacion_recibido', { lstRecBy: data })
+  })
+})
+
 router.get('/ubicacion_zona', (req, res, next) => {
   request('http://localhost:3002/almacen_zona', (error, response, body) => {
     data = JSON.parse(body)

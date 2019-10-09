@@ -3,3 +3,12 @@ nav(aria-label="breadcrumb")
     li.breadcrumb-item
       a#lnk_all(href="#") Todos
     li#selected_ent.breadcrumb-item.active(aria-current="page") Folio x
+if lstRecBy != undefined
+  .card-deck
+  each item in lstRecBy
+    .card
+      .card-body
+        h5.card-title Card title
+        p.card-text This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+      .card-footer
+          small.text-muted Last updated 3 mins ago

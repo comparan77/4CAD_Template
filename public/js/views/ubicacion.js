@@ -23,6 +23,24 @@ function init() {
 
 }
 
+function initRecivedBy(id_entrada, folio_entrada) {
+    $.ajax({
+        url: 'http://localhost:3001/ubicacion_recibido/' + id_entrada,
+        success: function(result) {
+            
+            $('#div-recibido').html(result);
+            $('#selected_ent').html(folio);
+
+            $('#lnk_all').click(()=> {
+                $('#div-recibidos').removeClass('d-none');
+                $('#div-recibido').addClass('d-none');
+                return false;
+            });
+
+        }
+    });
+}
+
 function initRecived() {
     
     $.ajax({
@@ -33,18 +51,13 @@ function initRecived() {
             
             $('#dataTable').DataTable();
 
-            $('#lnk_all').click(()=> {
-                $('#div-recibidos').removeClass('d-none');
-                $('#div-recibido').addClass('d-none');
-                return false;
-            });
             $('.folio-ent').each(function() {
-                $(this).click(()=> {
+                $(this).click(() => {
                     var id_entrada = $(this).next().val().split('_')[1];
                     var folio = $(this).children('span').html();
                     $('#div-recibidos').addClass('d-none');
                     $('#div-recibido').removeClass('d-none');
-                    $('#selected_ent').html(folio);
+                    initRecivedBy(id_entrada, folio);
                     return false;
                 })
             })
