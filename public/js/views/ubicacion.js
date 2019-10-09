@@ -29,7 +29,7 @@ function initRecivedBy(id_entrada, folio_entrada) {
         success: function(result) {
             
             $('#div-recibido').html(result);
-            $('#selected_ent').html(folio);
+            $('#selected_ent').html(folio_entrada);
 
             $('#lnk_all').click(()=> {
                 $('#div-recibidos').removeClass('d-none');
