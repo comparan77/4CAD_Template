@@ -7,18 +7,20 @@ if lstRecBy != undefined
   .row
     each item, index in lstRecBy
       .col-xl-3.col-md-6.mb-4
-        .card(class = item.Ubicado > 0 ? 'border-left-success' : 'border-left-danger')
-          .card-body
-            .row.no-gutters.align-items-center
-              .col.mr-2
-                h5.card-title #{item.Folio}
-                span.card-text Producto: #{item.Producto}
-                br
-                span.card-text Rotacion: #{item.Rotacion}
-                br
-                span.card-text Cajas: #{item.Cajas}
-                br
-                span.card-text Piezas: #{item.Piezas}
+        .card.shadow(class = item.Ubicado > 0 ? 'border-left-success' : 'border-left-danger')
+          a.d-block.card-header.py-3(href="#coll_tar_" + item.Id_entrada_producto data-toggle="collapse" role="button" aria-expanded="false" aria-controls="coll_tar_" + item.Id_entrada_producto)
+            h6.m-0.font-weight-bold.text-secondary #{item.Folio}
+          .collapse(id="coll_tar_" + item.Id_entrada_producto)
+            .card-body
+              .row.no-gutters.align-items-center
+                .col.mr-2
+                  span.card-text Producto: #{item.Producto}
+                  br
+                  span.card-text Rotacion: #{item.Rotacion}
+                  br
+                  span.card-text Cajas: #{item.Cajas}
+                  br
+                  span.card-text Piezas: #{item.Piezas}    
           .card-footer
             small.text-muted #{item.Formato} ubicada: #{item.Ubicado > 0 ? 'Si' : 'No'}
 

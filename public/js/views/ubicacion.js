@@ -1,4 +1,14 @@
-var isLayoutInit = false;
+var vs_ubica = {
+    isLayoutInit: false,
+    isRecibedInit: false,
+    to_udt_recibidos: undefined,
+    to_udt_recibido: undefined,
+    recived_opt: {
+        section: 'recived',
+        id_entrada: undefined,
+        folio_entrada: undefined
+    }
+};
 
 $(document).ready(function() {
     init();
@@ -10,11 +20,24 @@ function init() {
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         switch (e.target.id) {
+            case 'recibed-tab':
+                    if (vs_ubica.recived_opt.section == 'recived')
+                        initRecived();
+                    else 
+                        initRecivedBy(
+                            vs_ubica.recived_opt.id_entrada,
+                            vs_ubica.recived_opt.folio_entrada
+                        )
+                break;
             case 'layout-tab':
-                if(!isLayoutInit) {
+                if(!vs_ubica.isLayoutInit) {
                   initLayout();
-                  isLayoutInit = true;
+                  vs_ubica.isLayoutInit = true;
                 }
+                if (vs_ubica.recived_opt.section == 'recived')
+                    clearTimeout(vs_ubica.to_udt_recibidos);
+                else
+                    clearTimeout(vs_ubica.to_udt_recibido);
                 break;
             default:
                 break;
@@ -34,9 +57,18 @@ function initRecivedBy(id_entrada, folio_entrada) {
             $('#lnk_all').click(()=> {
                 $('#div-recibidos').removeClass('d-none');
                 $('#div-recibido').addClass('d-none');
+                clearTimeout(vs_ubica.to_udt_recibido);
+                initRecived();
                 return false;
             });
 
+            vs_ubica.to_udt_recibido = setTimeout(() => {
+                initRecivedBy(id_entrada, folio_entrada);
+            }, 5000);
+
+            vs_ubica.recived_opt.section = 'recivedBy';
+            vs_ubica.recived_opt.id_entrada = id_entrada;
+            vs_ubica.recived_opt.folio_entrada = folio_entrada;
         }
     });
 }
@@ -58,9 +90,17 @@ function initRecived() {
                     $('#div-recibidos').addClass('d-none');
                     $('#div-recibido').removeClass('d-none');
                     initRecivedBy(id_entrada, folio);
+                    clearTimeout(vs_ubica.to_udt_recibidos);
                     return false;
                 })
             })
+
+            vs_ubica.recived_opt.section = 'recived';
+
+            vs_ubica.to_udt_recibidos = setTimeout(() => {
+                initRecived();
+            }, 5000);
+            
         }
     })
 
