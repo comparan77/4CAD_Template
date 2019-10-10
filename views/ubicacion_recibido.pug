@@ -4,11 +4,21 @@ nav(aria-label="breadcrumb")
       a#lnk_all(href="#") Todos
     li#selected_ent.breadcrumb-item.active(aria-current="page") Folio x
 if lstRecBy != undefined
-  .card-deck
-  each item in lstRecBy
-    .card
-      .card-body
-        h5.card-title Card title
-        p.card-text This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-      .card-footer
-          small.text-muted Last updated 3 mins ago
+  .row
+    each item, index in lstRecBy
+      .col-xl-3.col-md-6.mb-4
+        .card(class = item.Ubicado > 0 ? 'border-left-success' : 'border-left-danger')
+          .card-body
+            .row.no-gutters.align-items-center
+              .col.mr-2
+                h5.card-title #{item.Folio}
+                span.card-text Producto: #{item.Producto}
+                br
+                span.card-text Rotacion: #{item.Rotacion}
+                br
+                span.card-text Cajas: #{item.Cajas}
+                br
+                span.card-text Piezas: #{item.Piezas}
+          .card-footer
+            small.text-muted #{item.Formato} ubicada: #{item.Ubicado > 0 ? 'Si' : 'No'}
+
