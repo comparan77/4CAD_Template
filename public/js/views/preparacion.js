@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    init(2);    
+    init(enumAlmacenMovGpo.Ubicacion);    
 });
 
 function init(id_almacen_movimiento_grupo) {
