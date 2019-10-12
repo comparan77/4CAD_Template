@@ -94,6 +94,13 @@ router.get('/preparacion', (req, res, next) => {
   res.render('preparacion', { title: 'Preparacion', option: 'preparacion' });
 });
 
+router.get('/preparacion_solicitud/:key', (req, res, next) => {
+  request('http://localhost:3002/ubicados/' + req.params.key, (error, response, body) => {
+    data = JSON.parse(body)
+    res.render('preparacion_solicitud', { lstEnt: data })
+  })
+});
+
 /* Expedicion. */
 router.get('/expedicion', (req, res, next) => {
   res.render('expedicion', { title: 'Expedicion', option: 'expedicion' });
