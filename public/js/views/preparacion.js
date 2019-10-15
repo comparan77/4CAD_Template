@@ -1,4 +1,5 @@
 var tbl_prod_ubica;
+var arrProdSel = [];
 
 $(document).ready(function() {
     init();    
@@ -15,7 +16,7 @@ function initRequisition(id_almacen_movimiento_grupo) {
             
             $('#div-preparacion_solicitud').html(result).removeClass('d-none');
             $('#ddl_entrada').selectpicker('refresh');
-
+            
             tbl_prod_ubica = $('#tbl_prod_ubica').DataTable({
                 paging: true,
                 searching: false,
@@ -26,10 +27,10 @@ function initRequisition(id_almacen_movimiento_grupo) {
                   "infoEmpty": ""
                   },
                 columns: [
+                  { "data": "Selection"},
                   { "data": "Folio"},
                   { "data": "Metodo"},
                   { "data": "Formato"},
-                  { "data": "Cantidad"},
                   { "data": "Cajas"},
                   { "data": "Piezas"},
                   { "data": "Tipo_referencia"},
@@ -49,15 +50,32 @@ function initRequisition(id_almacen_movimiento_grupo) {
 function refreshTbl_prod_ubica(id_entrada) {
        
     tbl_prod_ubica.clear().draw();
-
+    
     $.ajax({
         url: 'http://localhost:3002/productos_ubicados/' + enumAlmacenMovGpo.Ubicacion + '/key/' + id_entrada,
         success: function(result) {
             var arrPU = JSON.parse(result);
             for(var item in arrPU) {
-                tbl_prod_ubica.row.add(arrPU[item]).draw() ;
-                console.log(arrPU[item]);
+                var objPU = arrPU[item]; 
+                objPU.Selection = '<input class="inputEpu" id="epu_' + objPU.Id_entrada_producto + '" type="checkbox">';
+                tbl_prod_ubica.row.add(objPU).draw() ;
             }
+
+            $('.inputEpu').each(function(obj){
+                $(this).click(()=> {
+                    var Id_entrada_producto = $(this).prop('id');
+                    var oEPSel = {
+                        Id : Id_entrada_producto
+                    }
+                    if($(this).is(':checked'))
+                        arrProdSel.push(oEPSel);
+                    else 
+                        arrProdSel = arrProdSel.filter(obj => {
+                            return obj.Id != oEPSel.Id;
+                        });
+                    alert(arrProdSel.length);
+                })
+            });
         }
     });
 

@@ -4,7 +4,7 @@ form#frm-asn.needs-validation(novalidate)
       .card.shadow.mb-4
         //Card header
         .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          h6.m-0.font-weight-bold.text-primary 1.- Datos de la recepción
+          h6.m-0.font-weight-bold.text-primary 1.- Selección del producto
         //Card body
         .card-body
           .form-group
@@ -17,10 +17,11 @@ form#frm-asn.needs-validation(novalidate)
               table#tbl_prod_ubica.table.table-bordered(width="100%" style="cellspacing:0")
                 thead
                   tr
+                    th
+                      input(type="checkbox") 
                     th Folio
                     th Método
                     th Formato
-                    th Cantidad
                     th Cajas
                     th Piezas
                     th Tipo Ref.
