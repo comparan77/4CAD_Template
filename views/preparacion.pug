@@ -3,8 +3,16 @@ extends layout
 block content
 
   p #{message}
-  #div-preparacion_solicitud.d-none
-    include preparacion_solicitud.pug
+  ul#myTab.nav.nav-tabs(role="tablist")
+    li.nav-item
+      a#requsition-tab.nav-link.active(data-toggle="tab" href="#requsition" role="tab" aria-controls="requsition" aria-selected="true") Solicitud
+    li.nav-item
+      a#schedule-tab.nav-link(data-toggle="tab" href="#schedule" role="tab" aria-controls="schedule" aria-selected="false") Calendario
+  .tab-content
+    #requisition.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="requsition-tab")
+      .container(style="margin-top: 20px")
+        #div-preparacion_solicitud.d-none
+          include preparacion_solicitud.pug
 
 block scripts
   <script src='js/views/enum.js'></script>

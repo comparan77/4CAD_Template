@@ -8,7 +8,7 @@ form#frm-asn.needs-validation(novalidate)
         //Card body
         div.card-body
           div.form-group
-            select#ddl_entrada.form-control.custom-select(aria-expanded="false" data-live-search="true" data-title="Seleccione un Folio" required)
+            select#ddl_entrada.form-control.custom-select(aria-expanded="false" data-live-search="true" data-title="Seleccione un Folio de Entrada" required)
               if lstEnt != undefined
                 each itemE in lstEnt
                   option(value=itemE.Id_entrada) #{itemE.Folio}
