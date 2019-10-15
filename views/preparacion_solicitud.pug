@@ -1,21 +1,30 @@
 form#frm-asn.needs-validation(novalidate)
-  div.row
-    div.col-xl-12.col-lg-12
-      div.card.shadow.mb-4
+  .row
+    .col-xl-12.col-lg-12
+      .card.shadow.mb-4
         //Card header
-        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+        .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
           h6.m-0.font-weight-bold.text-primary 1.- Datos de la recepción
         //Card body
-        div.card-body
-          div.form-group
+        .card-body
+          .form-group
             select#ddl_entrada.form-control.custom-select(aria-expanded="false" data-live-search="true" data-title="Seleccione un Folio de Entrada" required)
               if lstEnt != undefined
                 each itemE in lstEnt
                   option(value=itemE.Id_entrada) #{itemE.Folio}
-        //-   div.form-group
-        //-     label(for="txt_fecha") Fecha de arribo
-        //-     input#txt_fecha.form-control(type="text" required)
-        //-     input#altTxt_fecha(type="hidden")
-        //-   div.form-group
-        //-     label(for="txt_hora") Hora de arribo
-        //-     input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time' required)
+          .form-group
+            .table-responsive
+              table#tbl_prod_ubica.table.table-bordered(width="100%" style="cellspacing:0")
+                thead
+                  tr
+                    th Folio
+                    th Método
+                    th Formato
+                    th Cantidad
+                    th Cajas
+                    th Piezas
+                    th Tipo Ref.
+                    th Ref.
+                    th Lote
+                    th Cad.
+                tbody

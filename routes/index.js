@@ -91,7 +91,7 @@ router.get('/ubicacion_zona_sel/:id_almacen', (req, res, next) => {
 
 /* Preparacion. */
 router.get('/preparacion', (req, res, next) => {
-  res.render('preparacion', { title: 'Preparacion', option: 'preparacion' });
+  res.render('preparacion', { title: 'Preparacion', option: 'preparacion', needTbl: true });
 });
 
 router.get('/preparacion_solicitud/:key', (req, res, next) => {
