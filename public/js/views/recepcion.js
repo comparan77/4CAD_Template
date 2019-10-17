@@ -68,6 +68,7 @@ function initASN() {
     columns: [
       { "data": "tipo"},
       { "data": "valor"},
+      { "data": "chkReq"},
       { "data": "quitar"}
     ]
   });
@@ -77,7 +78,9 @@ function initASN() {
       id: $('#ddl_documento').val(),
       tipo: $('#ddl_documento option:selected').html(),
       valor: $('#txt_referencia').val(),
-      quitar: '<a class="dltDoc" id="dlt_' +  $('#ddl_documento').val() + '" href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-eraser"></i></a>'
+      chkReq: '<input id="chkReq_' +  $('#ddl_documento').val() + '" class="chkReq" type="checkbox">',
+      quitar: '<a class="dltDoc" id="dlt_' +  $('#ddl_documento').val() + '" href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-eraser"></i></a>',
+      requerido: false
     }
 
     if($.grep(lstDoc, obj => {
@@ -115,12 +118,24 @@ function fillDoc() {
         var newLst = [];
         var idRemove = $(this).attr('id').split('_')[1];
         newLst = $.grep(lstDoc, obj => obj.id != idRemove);
-        console.log(JSON.stringify(newLst));
         lstDoc = newLst;
         fillDoc();
         return false;
       })
     });
+
+    $('.chkReq').each(function() {
+      $(this).click(obj => {
+        var idCheck = $(this).attr('id').split('_')[1];
+        var objCheck = lstDoc.filter(obj => {
+          return obj.id == idCheck;
+        })[0];
+
+        objCheck.requerido = $(this).prop('checked');
+        console.log(objCheck);
+      })
+    });
+
   }
   
   function fillCatalog(arrCatalogos, idx = 0) {
@@ -182,7 +197,8 @@ function fillDoc() {
       for(var i in lstDoc) {
         lDoc.push({
           Id_documento: lstDoc[i].id,
-          Referencia: lstDoc[i].valor
+          Referencia: lstDoc[i].valor,
+          Requerido: lstDoc[i].requerido
         });
       }
   
