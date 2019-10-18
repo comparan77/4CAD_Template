@@ -37,10 +37,6 @@ function initRequisition(id_almacen_movimiento_grupo) {
                   { "data": "Formato"},
                   { "data": "Cajas"},
                   { "data": "Piezas"},
-                  { "data": "Tipo_referencia"},
-                  { "data": "Referencia"},
-                  { "data": "Lote"},
-                  { "data": "Caducidad"}
                 ]
               });
             
