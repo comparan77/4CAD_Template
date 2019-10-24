@@ -32,7 +32,7 @@
                   input(type="hidden" value='key_' + item.Id_entrada)
                 td #{item.Cliente}
                 td #{item.Producto}
-                td.text-center #{item.Cantidad + ' ' + item.Formato + (item.Cantidad > 1 ? 's' : '')} 
+                td.text-center #{item.Cantidad + ' ' + item.UAlm + (item.Cantidad > 1 ? 's' : '')} 
                 td.text-center #{item.Ubicados}
                 td.text-center #{item.Pendientes}
                 td.text-center #{Math.round(item.Ubicados / item.Cantidad * 100,0)}
