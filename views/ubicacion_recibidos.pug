@@ -9,7 +9,7 @@
             th Folio
             th Cliente
             th Producto
-            th Tarimas
+            th Cantidad
             th Ubicado(s)
             th Pendiente(s)
             th % Ubicados
@@ -18,7 +18,7 @@
             th Folio
             th Cliente
             th Producto
-            th Tarimas
+            th Cantidad
             th Ubicado(s)
             th Pendiente(s)
             th % Ubicados
@@ -32,7 +32,7 @@
                   input(type="hidden" value='key_' + item.Id_entrada)
                 td #{item.Cliente}
                 td #{item.Producto}
-                td.text-center #{item.Tarimas}
+                td.text-center #{item.Cantidad + ' ' + item.Formato + (item.Cantidad > 1 ? 's' : '')} 
                 td.text-center #{item.Ubicados}
                 td.text-center #{item.Pendientes}
-                td.text-center #{Math.round(item.Ubicados / item.Tarimas * 100,0)}
+                td.text-center #{Math.round(item.Ubicados / item.Cantidad * 100,0)}
