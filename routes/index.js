@@ -19,14 +19,21 @@ router.get('/asn', (req, res, next) => {
 });
 
 router.get('/recepcion', (req, res, next) => {
-  request('http://localhost:3002/asn_rec_cortina', (error, response, body) => {
-    // console.log('error:', error); // Print the error if one occurred
-    // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    // console.log('body:', body); // Print the HTML for the Google homepage.
-    // console.log(JSON.parse(body));
-    res.render('recepcion', { title: 'Recepción de Producto', option: 'recepcion', needTbl: true, arrAsnRecCor: JSON.parse(body)});
-  });
+  // request('http://localhost:3002/asn_rec_cortina', (error, response, body) => {
+  //   // console.log('error:', error); // Print the error if one occurred
+  //   // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  //   // console.log('body:', body); // Print the HTML for the Google homepage.
+  //   // console.log(JSON.parse(body));
+  //   res.render('recepcion', { title: 'Recepción', option: 'recepcion', needTbl: true, arrAsnRecCor: JSON.parse(body)});
+  // });
+  res.render('recepcion', { title: 'Recepción', option: 'recepcion', needTbl: true });
 });
+
+router.get('/recepcion_cortinas', (req, res, next) => {
+  request('http://localhost:3002/asn_rec_cortina', (error, response, body) => {
+    res.render('recepcion_cortinas', { arrAsnRecCor: JSON.parse(body)});
+  });
+})
 
 function initDashboard(res) {
   res.render('dashboard', { title: 'Dashboard', option: 'dashboard', needTbl: true });
