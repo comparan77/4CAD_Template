@@ -1,82 +1,65 @@
-var lstDoc = [];
-var tbl_referencia;
-$(document).ready(function() {
+function initASN() {
 
   var arrCatalogos = ['cliente', 'almacen', 'transporte_linea', 'vendor', 'documento'];
-  fillCatalog(arrCatalogos);
-  
-  $('#txt_fecha').datepicker({
-    regional: 'es',
-    dateFormat: 'dd-mm-yy ',
-    altFormat: 'yy-mm-dd',
-    altField: '#altTxt_fecha'
-  });
-  
-  tbl_referencia = $('#tbl_referencia').DataTable({
-    paging: false,
-    searching: false,
-    ordering:  false,
-    "language": {
-      "info": "Mostrando _PAGE_ página de _PAGES_",
-      "emptyTable": "Ningún documento agreado",
-      "infoEmpty": ""
-      },
-    columns: [
-      { "data": "tipo"},
-      { "data": "valor"},
-      { "data": "quitar"}
-    ]
-  });
+fillCatalog(arrCatalogos);
 
-  $('#add_referencia').click(obj => {
-    var oDoc = {
-      id: $('#ddl_documento').val(),
-      tipo: $('#ddl_documento option:selected').html(),
-      valor: $('#txt_referencia').val(),
-      quitar: '<a class="dltDoc" id="dlt_' +  $('#ddl_documento').val() + '" href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-eraser"></i></a>'
-    }
+$('#txt_fecha').datepicker({
+  regional: 'es',
+  dateFormat: 'dd-mm-yy ',
+  altFormat: 'yy-mm-dd',
+  altField: '#altTxt_fecha'
+});
 
-    if($.grep(lstDoc, obj => {
-      return obj.id == oDoc.id
-    }).length>0)
-      return false;
+tbl_referencia = $('#tbl_referencia').DataTable({
+  paging: false,
+  searching: false,
+  ordering:  false,
+  "language": {
+    "info": "Mostrando _PAGE_ página de _PAGES_",
+    "emptyTable": "Ningún documento agreado",
+    "infoEmpty": ""
+    },
+  columns: [
+    { "data": "tipo"},
+    { "data": "valor"},
+    { "data": "chkReq"},
+    { "data": "quitar"}
+  ]
+});
 
-    lstDoc.push(oDoc);
-    fillDoc();
+$('#add_referencia').click(obj => {
+  var oDoc = {
+    id: $('#ddl_documento').val(),
+    tipo: $('#ddl_documento option:selected').html(),
+    valor: $('#txt_referencia').val(),
+    chkReq: '<input id="chkReq_' +  $('#ddl_documento').val() + '" class="chkReq" type="checkbox">',
+    quitar: '<a class="dltDoc" id="dlt_' +  $('#ddl_documento').val() + '" href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-eraser"></i></a>',
+    requerido: false
+  }
 
-  });
+  if($.grep(lstDoc, obj => {
+    return obj.id == oDoc.id
+  }).length>0)
+    return false;
 
-  $('#ddl_transporte_linea').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-    fillTransporte_tipo($('#ddl_transporte_linea').val());
-  });
-
-  $('#ddl_transporte_tipo').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-    setFormTransporteTipo();
-  });
-
-  $('#ddl_vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-    fillVendor_producto($('#ddl_vendor').val());
-  });
-
-  $('#add_asn_').click(() => {
-
-    
-
-    // $.post("http://localhost:3002/asn", JSON.stringify(oAsn), function(data) {
-    //   console.log(JSON.stringify(data));
-    // })
-    // .fail(function() {
-    //   alert( "error" );
-    // })
-    // .always(function() {
-    //   alert( "finished" );
-    // });
-
-    // console.log(JSON.stringify(oAsn));
-
-  });
+  lstDoc.push(oDoc);
+  fillDoc();
 
 });
+
+$('#ddl_transporte_linea').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+  fillTransporte_tipo($('#ddl_transporte_linea').val());
+});
+
+$('#ddl_transporte_tipo').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+  setFormTransporteTipo();
+});
+
+$('#ddl_vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+  fillVendor_producto($('#ddl_vendor').val());
+});
+
+}
 
 function fillDoc() {
   tbl_referencia.clear().draw();
@@ -89,12 +72,24 @@ function fillDoc() {
       var newLst = [];
       var idRemove = $(this).attr('id').split('_')[1];
       newLst = $.grep(lstDoc, obj => obj.id != idRemove);
-      console.log(JSON.stringify(newLst));
       lstDoc = newLst;
       fillDoc();
       return false;
     })
   });
+
+  $('.chkReq').each(function() {
+    $(this).click(obj => {
+      var idCheck = $(this).attr('id').split('_')[1];
+      var objCheck = lstDoc.filter(obj => {
+        return obj.id == idCheck;
+      })[0];
+
+      objCheck.requerido = $(this).prop('checked');
+      console.log(objCheck);
+    })
+  });
+
 }
 
 function fillCatalog(arrCatalogos, idx = 0) {
@@ -156,7 +151,8 @@ function saveAsn() {
     for(var i in lstDoc) {
       lDoc.push({
         Id_documento: lstDoc[i].id,
-        Referencia: lstDoc[i].valor
+        Referencia: lstDoc[i].valor,
+        Requerido: lstDoc[i].requerido
       });
     }
 
@@ -166,6 +162,7 @@ function saveAsn() {
       Fecha_arribo: $('#altTxt_fecha').val(),
       Hora_arribo: $('#txt_hora').val(),
       Id_vendor_producto: $('#ddl_vendor_producto').val(),
+      Tarima_declarada: $('#txt_tar').val(), 
       Caja_declarada: $('#txt_cja').val(),
       Pieza_declarada: $('#txt_pza').val(),
       Operador: $('#txt_operador').val(),
