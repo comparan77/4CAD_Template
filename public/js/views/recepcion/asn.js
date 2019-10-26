@@ -1,6 +1,12 @@
+var vw_asn = {
+  lstDoc: [],
+  tbl_referencia: undefined
+}
+
 function initASN() {
 
-  var arrCatalogos = ['cliente', 'almacen', 'transporte_linea', 'vendor', 'documento'];
+var arrCatalogos = ['cliente', 'almacen', 'transporte_linea', 'vendor', 'documento'];
+
 fillCatalog(arrCatalogos);
 
 $('#txt_fecha').datepicker({
@@ -10,7 +16,7 @@ $('#txt_fecha').datepicker({
   altField: '#altTxt_fecha'
 });
 
-tbl_referencia = $('#tbl_referencia').DataTable({
+vw_asn.tbl_referencia = $('#tbl_referencia').DataTable({
   paging: false,
   searching: false,
   ordering:  false,
@@ -27,67 +33,26 @@ tbl_referencia = $('#tbl_referencia').DataTable({
   ]
 });
 
-$('#add_referencia').click(obj => {
-  var oDoc = {
-    id: $('#ddl_documento').val(),
-    tipo: $('#ddl_documento option:selected').html(),
-    valor: $('#txt_referencia').val(),
-    chkReq: '<input id="chkReq_' +  $('#ddl_documento').val() + '" class="chkReq" type="checkbox">',
-    quitar: '<a class="dltDoc" id="dlt_' +  $('#ddl_documento').val() + '" href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-eraser"></i></a>',
-    requerido: false
-  }
-
-  if($.grep(lstDoc, obj => {
-    return obj.id == oDoc.id
-  }).length>0)
-    return false;
-
-  lstDoc.push(oDoc);
-  fillDoc();
-
-});
-
-$('#ddl_transporte_linea').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-  fillTransporte_tipo($('#ddl_transporte_linea').val());
-});
-
-$('#ddl_transporte_tipo').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-  setFormTransporteTipo();
-});
-
-$('#ddl_vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-  fillVendor_producto($('#ddl_vendor').val());
-});
+add_referencia_click();
+ddl_transporte_linea_change();
+ddl_transporte_tipo_change();
+ddl_vendor_change();
 
 }
 
+// Metodos
 function fillDoc() {
-  tbl_referencia.clear().draw();
-  for(var i in lstDoc) {
-    tbl_referencia.row.add(lstDoc[i]).draw() ;
+  vw_asn.tbl_referencia.clear().draw();
+  for(var i in vw_asn.lstDoc) {
+    vw_asn.tbl_referencia.row.add(vw_asn.lstDoc[i]).draw() ;
   }
 
   $('.dltDoc').each(function() {
-    $(this).click(obj => {
-      var newLst = [];
-      var idRemove = $(this).attr('id').split('_')[1];
-      newLst = $.grep(lstDoc, obj => obj.id != idRemove);
-      lstDoc = newLst;
-      fillDoc();
-      return false;
-    })
+    dlt_doc_click($(this));
   });
 
   $('.chkReq').each(function() {
-    $(this).click(obj => {
-      var idCheck = $(this).attr('id').split('_')[1];
-      var objCheck = lstDoc.filter(obj => {
-        return obj.id == idCheck;
-      })[0];
-
-      objCheck.requerido = $(this).prop('checked');
-      console.log(objCheck);
-    })
+    chk_doc_requerido_click($(this));
   });
 
 }
@@ -148,11 +113,11 @@ function saveAsn() {
   $('#add_asn').prop('disabled', true).prop('aria-disabled', true).html('Guardando ASN...');
 
     var lDoc = [];
-    for(var i in lstDoc) {
+    for(var i in vw_asn.lstDoc) {
       lDoc.push({
-        Id_documento: lstDoc[i].id,
-        Referencia: lstDoc[i].valor,
-        Requerido: lstDoc[i].requerido
+        Id_documento: vw_asn.lstDoc[i].id,
+        Referencia: vw_asn.lstDoc[i].valor,
+        Requerido: vw_asn.lstDoc[i].requerido
       });
     }
 
@@ -216,3 +181,70 @@ function saveAsn() {
     });
   }, false);
 })();
+
+// Eventos
+function add_referencia_click() {
+  $('#add_referencia').click(obj => {
+
+    if($('#txt_referencia').val().length<1) 
+      return false;
+
+    var oDoc = {
+      id: $('#ddl_documento').val(),
+      tipo: $('#ddl_documento option:selected').html(),
+      valor: $('#txt_referencia').val(),
+      chkReq: '<input id="chkReq_' +  $('#ddl_documento').val() + '" class="chkReq" type="checkbox">',
+      quitar: '<a class="dltDoc" id="dlt_' +  $('#ddl_documento').val() + '" href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-eraser"></i></a>',
+      requerido: false
+    }
+  
+    if($.grep(vw_asn.lstDoc, obj => {
+      return obj.id == oDoc.id
+    }).length>0)
+      return false;
+  
+    vw_asn.lstDoc.push(oDoc);
+    fillDoc();
+  
+  });
+}
+
+function ddl_transporte_linea_change() {
+  $('#ddl_transporte_linea').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    fillTransporte_tipo($('#ddl_transporte_linea').val());
+  });  
+}
+
+function ddl_transporte_tipo_change() {
+  $('#ddl_transporte_tipo').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    setFormTransporteTipo();
+  });
+}
+
+function ddl_vendor_change() {
+  $('#ddl_vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    fillVendor_producto($('#ddl_vendor').val());
+  });
+}
+
+function dlt_doc_click(control) {
+  $(control).click(() => {
+    var newLst = [];
+    var idRemove = $(control).attr('id').split('_')[1];
+    newLst = $.grep(vw_asn.lstDoc, obj => obj.id != idRemove);
+    vw_asn.lstDoc = newLst;
+    fillDoc();
+    return false;
+  })
+}
+
+function chk_doc_requerido_click(control) {
+  $(control).click(() => {
+    var idCheck = $(control).attr('id').split('_')[1];
+    var objCheck = vw_asn.lstDoc.filter(obj => {
+      return obj.id == idCheck;
+    })[0];
+
+    objCheck.requerido = $(control).prop('checked');
+  })
+}
