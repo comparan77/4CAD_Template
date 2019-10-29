@@ -1,21 +1,7 @@
-var lstDoc = [];
-var tbl_referencia;
-
-var calendar;
-var arrAsnRecCor = [];
-var to_udt_cortina;
-var to_udt_cortina_alm;
-
-var isScheduleInit = false;
-var istReceivingInit = false;
-
-var vw_recepcion = {
-  calendar: undefined,
-  arrAsnRecCor: [],
-  to_udt_cortina: undefined,
-  to_udt_cortina_alm: undefined,
+var gv_recepcion = {
   isScheduleInit: false,
-  istReceivingInit: false
+  istReceivingInit: false,
+  isReceivingPage: false
 }
 
 $(document).ready(function() {
@@ -31,16 +17,22 @@ function init() {
         // e.relatedTarget // previous active tab
         switch (e.target.id) {
             case 'schedule-tab':
-                if(!isScheduleInit) {
+                gv_recepcion.isReceivingPage = false;
+                if(!gv_recepcion.isScheduleInit) {
                   initSchedule();
-                  isScheduleInit = true;
+                  gv_recepcion.isScheduleInit = true;
                 }
+                
                 break;
             case 'receiving-tab':
-                if(!istReceivingInit) {
+                gv_recepcion.isReceivingPage = true;
+                if(!gv_recepcion.istReceivingInit) {
                   initReceiving();
-                  istReceivingInit = true;
+                  gv_recepcion.istReceivingInit = true;
                 }
+              break;
+            case 'asn-tab':
+                gv_recepcion.isReceivingPage = false;
               break;
             default:
                 break;

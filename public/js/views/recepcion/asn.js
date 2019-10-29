@@ -1,4 +1,4 @@
-var vw_asn = {
+var gv_asn = {
   lstDoc: [],
   tbl_referencia: undefined
 }
@@ -16,7 +16,7 @@ $('#txt_fecha').datepicker({
   altField: '#altTxt_fecha'
 });
 
-vw_asn.tbl_referencia = $('#tbl_referencia').DataTable({
+gv_asn.tbl_referencia = $('#tbl_referencia').DataTable({
   paging: false,
   searching: false,
   ordering:  false,
@@ -42,9 +42,9 @@ ddl_vendor_change();
 
 // Metodos
 function fillDoc() {
-  vw_asn.tbl_referencia.clear().draw();
-  for(var i in vw_asn.lstDoc) {
-    vw_asn.tbl_referencia.row.add(vw_asn.lstDoc[i]).draw() ;
+  gv_asn.tbl_referencia.clear().draw();
+  for(var i in gv_asn.lstDoc) {
+    gv_asn.tbl_referencia.row.add(gv_asn.lstDoc[i]).draw() ;
   }
 
   $('.dltDoc').each(function() {
@@ -113,11 +113,11 @@ function saveAsn() {
   $('#add_asn').prop('disabled', true).prop('aria-disabled', true).html('Guardando ASN...');
 
     var lDoc = [];
-    for(var i in vw_asn.lstDoc) {
+    for(var i in gv_asn.lstDoc) {
       lDoc.push({
-        Id_documento: vw_asn.lstDoc[i].id,
-        Referencia: vw_asn.lstDoc[i].valor,
-        Requerido: vw_asn.lstDoc[i].requerido
+        Id_documento: gv_asn.lstDoc[i].id,
+        Referencia: gv_asn.lstDoc[i].valor,
+        Requerido: gv_asn.lstDoc[i].requerido
       });
     }
 
@@ -198,12 +198,12 @@ function add_referencia_click() {
       requerido: false
     }
   
-    if($.grep(vw_asn.lstDoc, obj => {
+    if($.grep(gv_asn.lstDoc, obj => {
       return obj.id == oDoc.id
     }).length>0)
       return false;
   
-    vw_asn.lstDoc.push(oDoc);
+    gv_asn.lstDoc.push(oDoc);
     fillDoc();
   
   });
@@ -231,8 +231,8 @@ function dlt_doc_click(control) {
   $(control).click(() => {
     var newLst = [];
     var idRemove = $(control).attr('id').split('_')[1];
-    newLst = $.grep(vw_asn.lstDoc, obj => obj.id != idRemove);
-    vw_asn.lstDoc = newLst;
+    newLst = $.grep(gv_asn.lstDoc, obj => obj.id != idRemove);
+    gv_asn.lstDoc = newLst;
     fillDoc();
     return false;
   })
@@ -241,7 +241,7 @@ function dlt_doc_click(control) {
 function chk_doc_requerido_click(control) {
   $(control).click(() => {
     var idCheck = $(control).attr('id').split('_')[1];
-    var objCheck = vw_asn.lstDoc.filter(obj => {
+    var objCheck = gv_asn.lstDoc.filter(obj => {
       return obj.id == idCheck;
     })[0];
 
