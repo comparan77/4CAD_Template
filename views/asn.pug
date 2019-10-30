@@ -1,10 +1,41 @@
 form#frm-asn.needs-validation(novalidate)
   div.row
+
+    div.col-xl-12.col-lg-12
+      div.card.shadow.mb-4
+        //card header
+        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+          div.m-0.font-weight-bold.text-primary 1.- Unidad de transporte
+        div.card-body
+          div.form-group
+            label(for="txt_sello") Sello
+            input#txt_sello.form-control(placeholder='Número de sello' type='text')
+          div.form-group
+            label(for="txt_operador") Operador
+            input#txt_operador.form-control(placeholder='Nombre del Operador' type='text')
+          div.form-group
+            select#ddl_transporte_linea.selectpicker.form-control(data-live-search="true" data-title="Seleccione una linea de transporte")
+          div.form-group
+            select#ddl_transporte_tipo.selectpicker.form-control(data-live-search="true" data-title="Seleccione un tipo de transporte")
+          #datosVehiculo.d-none
+            div#div_placa.form-group
+              label(for="txt_placa") Placa
+              input#txt_placa.form-control(placeholder='Número de placa' type='text')
+            div#div_caja.form-group
+              label(for="txt_caja") Caja
+              input#txt_caja.form-control(placeholder='Número de la caja' type='text')
+            div#div_cont1.form-group
+              label(for="txt_contenedor_1") Contenedor 1
+              input#txt_contenedor-1.form-control(placeholder='Número del contenedor 1' type='text')
+            div#div_cont2.form-group
+              label(for="txt_contenedor_2") Contenedor 2
+              input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
+
     div.col-xl-12.col-lg-12
       div.card.shadow.mb-4
         //Card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          h6.m-0.font-weight-bold.text-primary 1.- Datos Generales
+          h6.m-0.font-weight-bold.text-primary 2.- Datos Generales
         //Card body
         div.card-body
           div.form-group
@@ -27,19 +58,19 @@ form#frm-asn.needs-validation(novalidate)
       div.card.shadow.mb-4
         //card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          div.m-0.font-weight-bold.text-primary 2.- Producto
+          div.m-0.font-weight-bold.text-primary 3.- Producto
         div.card-body
           div.form-group
             select#ddl_vendor.selectpicker.form-control(data-live-search="true" data-title="Seleccione un vendor" required)
           div.form-group
             label(for="txt_producto") Producto
             select#ddl_vendor_producto.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto" required)
-          div.form-group
-            label(for="txt_tar") Tarimas Declaradas
-            input#txt_tar.form-control(placeholder='Tarimas declaradas' type='number')
-          div.form-group
-            label(for="txt_cja") Cajas Declaradas
-            input#txt_cja.form-control(placeholder='Cajas declaradas' type='number' required)
+          //- div.form-group
+          //-   label(for="txt_tar") Tarimas Declaradas
+          //-   input#txt_tar.form-control(placeholder='Tarimas declaradas' type='number')
+          //- div.form-group
+          //-   label(for="txt_cja") Cajas Declaradas
+          //-   input#txt_cja.form-control(placeholder='Cajas declaradas' type='number' required)
           div.form-group
             label(for="txt_pza") Piezas Declaradas
             input#txt_pza.form-control(placeholder='Piezas declaradas' type='number' required)
@@ -49,7 +80,7 @@ form#frm-asn.needs-validation(novalidate)
       div.card.shadow.mb-4
         //card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          div.m-0.font-weight-bold.text-primary 3.- Documentación
+          div.m-0.font-weight-bold.text-primary 4.- Documentación
         div.card-body
           div.form-group
             select#ddl_documento.selectpicker.form-control(data-live-search="true" data-title="Seleccione documentos")
@@ -68,36 +99,6 @@ form#frm-asn.needs-validation(novalidate)
                     th Requerido
                     th(align="center") Quitar
                 tbody
-  
-    div.col-xl-12.col-lg-12
-      div.card.shadow.mb-4
-        //card header
-        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          div.m-0.font-weight-bold.text-primary 4.- Unidad de transporte
-        div.card-body
-          div.form-group
-            label(for="txt_operador") Operador
-            input#txt_operador.form-control(placeholder='Nombre del Operador' type='text')
-          div.form-group
-            label(for="txt_sello") Sello
-            input#txt_sello.form-control(placeholder='Número de sello' type='text')
-          div.form-group
-            select#ddl_transporte_linea.selectpicker.form-control(data-live-search="true" data-title="Seleccione una linea de transporte")
-          div.form-group
-            select#ddl_transporte_tipo.selectpicker.form-control(data-live-search="true" data-title="Seleccione un tipo de transporte")
-          #datosVehiculo.d-none
-            div#div_placa.form-group
-              label(for="txt_placa") Placa
-              input#txt_placa.form-control(placeholder='Número de placa' type='text')
-            div#div_caja.form-group
-              label(for="txt_caja") Caja
-              input#txt_caja.form-control(placeholder='Número de la caja' type='text')
-            div#div_cont1.form-group
-              label(for="txt_contenedor_1") Contenedor 1
-              input#txt_contenedor-1.form-control(placeholder='Número del contenedor 1' type='text')
-            div#div_cont2.form-group
-              label(for="txt_contenedor_2") Contenedor 2
-              input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
 
   .container
     .row

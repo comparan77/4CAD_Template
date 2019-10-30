@@ -121,24 +121,27 @@ function saveAsn() {
       });
     }
 
+    var oAsn_producto = {
+      Id_vendor_producto: $('#ddl_vendor_producto').val(),
+      Pieza_declarada: $('#txt_pza').val(),
+    }
+
     var oAsn = {
       Id_cliente: $('#ddl_cliente').val(),
       Id_almacen: $('#ddl_almacen').val(),
       Fecha_arribo: $('#altTxt_fecha').val(),
       Hora_arribo: $('#txt_hora').val(),
-      Id_vendor_producto: $('#ddl_vendor_producto').val(),
-      Tarima_declarada: $('#txt_tar').val(), 
-      Caja_declarada: $('#txt_cja').val(),
-      Pieza_declarada: $('#txt_pza').val(),
       Operador: $('#txt_operador').val(),
       Sello: $('#txt_sello').val(),
+      Sello_c_w_ma: $('#txt_sello').val() + '_' + $('#ddl_cliente').val() + '_' + moment($('#altTxt_fecha').val(), 'YYYY-MM-DD').week() + '_' + $('#altTxt_fecha').val().substring(5,7) + $('#altTxt_fecha').val().substring(2,4),
       Id_transporte_linea: $('#ddl_transporte_linea').val(),
       Id_transporte_tipo: $('#ddl_transporte_tipo').val(),
       Placa: $('#txt_placa').val(),
       Caja: $('#txt_caja').val(),
       Cont_1: $('#txt_contenedor-1').val(),
       Cont_2: $('#txt_contenedor-2').val(),
-      lstDoc: lDoc
+      lstDoc: lDoc,
+      Producto: oAsn_producto
     };
 
     var request = $.ajax({
