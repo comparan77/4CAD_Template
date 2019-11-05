@@ -3,13 +3,36 @@ form#frm-asn.needs-validation(novalidate)
 
     div.col-xl-12.col-lg-12
       div.card.shadow.mb-4
+        //Card header
+        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+          h6.m-0.font-weight-bold.text-primary 1.- Datos Generales
+        //Card body
+        div.card-body
+          div.form-group
+            //- label(for="txt_cliente") Cliente
+            //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
+            select#ddl_cliente.selectpicker.form-control.custom-select(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente" required)
+          //- div.form-group
+          //-   select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
+          div.form-group
+            label(for="txt_fecha") Fecha de arribo
+            input#txt_fecha.form-control(type="text" required)
+            input#altTxt_fecha(type="hidden")
+          div.form-group
+            label(for="txt_hora") Hora de arribo
+            input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time' required)
+    
+    div.col-xl-12.col-lg-12
+      div.card.shadow.mb-4
         //card header
         div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          div.m-0.font-weight-bold.text-primary 1.- Unidad de transporte
+          div.m-0.font-weight-bold.text-primary 2.- Datos del arribo
         div.card-body
           div.form-group
             label(for="txt_sello") Sello
             input#txt_sello.form-control(placeholder='Número de sello' type='text')
+          div.form-group
+            select#ddl_almacen.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén" required)
           div.form-group
             label(for="txt_operador") Operador
             input#txt_operador.form-control(placeholder='Nombre del Operador' type='text')
@@ -30,29 +53,6 @@ form#frm-asn.needs-validation(novalidate)
             div#div_cont2.form-group
               label(for="txt_contenedor_2") Contenedor 2
               input#txt_contenedor-2.form-control(placeholder='Número del contenedor 2' type='text')
-
-    div.col-xl-12.col-lg-12
-      div.card.shadow.mb-4
-        //Card header
-        div.card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          h6.m-0.font-weight-bold.text-primary 2.- Datos Generales
-        //Card body
-        div.card-body
-          div.form-group
-            //- label(for="txt_cliente") Cliente
-            //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
-            select#ddl_cliente.selectpicker.form-control.custom-select(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente" required)
-          div.form-group
-            select#ddl_almacen.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén" required)
-          //- div.form-group
-          //-   select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
-          div.form-group
-            label(for="txt_fecha") Fecha de arribo
-            input#txt_fecha.form-control(type="text" required)
-            input#altTxt_fecha(type="hidden")
-          div.form-group
-            label(for="txt_hora") Hora de arribo
-            input#txt_hora.form-control(placeholder='Hora de llegada al almacén' type='time' required)
   
     div.col-xl-12.col-lg-12
       div.card.shadow.mb-4

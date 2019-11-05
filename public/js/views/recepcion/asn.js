@@ -1,6 +1,10 @@
 var gv_asn = {
   lstDoc: [],
-  tbl_referencia: undefined
+  tbl_referencia: undefined,
+  sello: '',
+  Id_transporte_tipo_sel: 0,
+  es_compartida: false,
+  asn_id: 0
 }
 
 function initASN() {
@@ -33,7 +37,11 @@ gv_asn.tbl_referencia = $('#tbl_referencia').DataTable({
   ]
 });
 
+txt_fecha_onChange();
+txt_hora_onChange();
+txt_sello_onChange();
 add_referencia_click();
+ddl_cliente_change();
 ddl_transporte_linea_change();
 ddl_transporte_tipo_change();
 ddl_vendor_change();
@@ -41,6 +49,29 @@ ddl_vendor_change();
 }
 
 // Metodos
+function selloUpdate() {
+  gv_asn.sello = $('#txt_sello').val() + '_' + $('#ddl_cliente').val() + '_' + $('#altTxt_fecha').val() + ':' + $('#txt_hora').val();
+  gv_asn.Id_transporte_tipo_sel = 0;
+  gv_asn.es_compartida = false;
+  $('#add_asn').html('Guardar Aviso de Arribo');
+  
+  $.getJSON("http://localhost:3002/asn_selloSearch/" + gv_asn.sello, function(data) {
+    if(data.Id != undefined) {
+      $('#ddl_almacen').selectpicker('val', data.Id_almacen);
+      $('#txt_operador').val(data.Operador);
+      $('#ddl_transporte_linea').selectpicker('val', data.Id_transporte_linea);
+      gv_asn.Id_transporte_tipo_sel = data.Id_transporte_tipo;
+      $('#txt_placa').val(data.Placa);
+      $('#txt_caja').val(data.Caja);
+      $('#txt_contenedor-1').val(data.Cont_1);
+      $('#txt_contenedor-2').val(data.Cont_2);
+      gv_asn.es_compartida = true;
+      gv_asn.asn_id = data.Id;
+      $('#add_asn').html('Guardar ASN compartido');
+    }
+  })
+}
+
 function fillDoc() {
   gv_asn.tbl_referencia.clear().draw();
   for(var i in gv_asn.lstDoc) {
@@ -79,6 +110,9 @@ function fillTransporte_tipo(id) {
     });
     $('#ddl_transporte_tipo').selectpicker('refresh');
     $('#datosVehiculo').addClass('d-none');
+    if(gv_asn.Id_transporte_tipo_sel > 0) {
+      $('#ddl_transporte_tipo').selectpicker('val', gv_asn.Id_transporte_tipo_sel);
+    }
   });
 }
 
@@ -115,6 +149,7 @@ function saveAsn() {
     var lDoc = [];
     for(var i in gv_asn.lstDoc) {
       lDoc.push({
+        Id_asn: gv_asn.asn_id,
         Id_documento: gv_asn.lstDoc[i].id,
         Referencia: gv_asn.lstDoc[i].valor,
         Requerido: gv_asn.lstDoc[i].requerido
@@ -122,30 +157,39 @@ function saveAsn() {
     }
 
     var oAsn_producto = {
+      Id_asn: gv_asn.asn_id,
       Id_vendor_producto: $('#ddl_vendor_producto').val(),
       Pieza_declarada: $('#txt_pza').val(),
     }
 
-    var oAsn = {
-      Id_cliente: $('#ddl_cliente').val(),
-      Id_almacen: $('#ddl_almacen').val(),
-      Fecha_arribo: $('#altTxt_fecha').val(),
-      Hora_arribo: $('#txt_hora').val(),
-      Operador: $('#txt_operador').val(),
-      Sello: $('#txt_sello').val(),
-      Sello_c_w_ma: $('#txt_sello').val() + '_' + $('#ddl_cliente').val() + '_' + moment($('#altTxt_fecha').val(), 'YYYY-MM-DD').week() + '_' + $('#altTxt_fecha').val().substring(5,7) + $('#altTxt_fecha').val().substring(2,4),
-      Id_transporte_linea: $('#ddl_transporte_linea').val(),
-      Id_transporte_tipo: $('#ddl_transporte_tipo').val(),
-      Placa: $('#txt_placa').val(),
-      Caja: $('#txt_caja').val(),
-      Cont_1: $('#txt_contenedor-1').val(),
-      Cont_2: $('#txt_contenedor-2').val(),
-      lstDoc: lDoc,
-      Producto: oAsn_producto
-    };
+    var oAsn;
+    if (!gv_asn.es_compartida) {
+      oAsn = {
+        Id_cliente: $('#ddl_cliente').val(),
+        Id_almacen: $('#ddl_almacen').val(),
+        Fecha_arribo: $('#altTxt_fecha').val(),
+        Hora_arribo: $('#txt_hora').val(),
+        Operador: $('#txt_operador').val(),
+        Sello: $('#txt_sello').val(),
+        Sello_cte_dt: $('#txt_sello').val() + '_' + $('#ddl_cliente').val() + '_' + $('#altTxt_fecha').val() + ':' + $('#txt_hora').val(),
+        Id_transporte_linea: $('#ddl_transporte_linea').val(),
+        Id_transporte_tipo: $('#ddl_transporte_tipo').val(),
+        Placa: $('#txt_placa').val(),
+        Caja: $('#txt_caja').val(),
+        Cont_1: $('#txt_contenedor-1').val(),
+        Cont_2: $('#txt_contenedor-2').val(),
+        lstDoc: lDoc,
+        Producto: oAsn_producto
+      };
+    } else {
+      oAsn = {
+        lstDoc: lDoc,
+        Producto: oAsn_producto
+      }
+    }
 
     var request = $.ajax({
-      url: "http://localhost:3002/asn",
+      url: !gv_asn.es_compartida ? "http://localhost:3002/asn" : "http://localhost:3002/asn_share",
       method: "POST",
       data: JSON.stringify(oAsn),
       contentType: "application/json",
@@ -186,6 +230,24 @@ function saveAsn() {
 })();
 
 // Eventos
+function txt_sello_onChange() {
+  $('#txt_sello').change(()=> {
+    selloUpdate();
+  })
+}
+
+function txt_fecha_onChange() {
+  $('#txt_fecha').change(()=> {
+    selloUpdate();
+  })
+}
+
+function txt_hora_onChange() {
+  $('#txt_hora').change(()=> {
+    selloUpdate();
+  })
+}
+
 function add_referencia_click() {
   $('#add_referencia').click(obj => {
 
@@ -210,6 +272,12 @@ function add_referencia_click() {
     fillDoc();
   
   });
+}
+
+function ddl_cliente_change() {
+  $('#ddl_cliente').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    selloUpdate();
+  });  
 }
 
 function ddl_transporte_linea_change() {
