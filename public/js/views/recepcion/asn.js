@@ -4,7 +4,8 @@ var gv_asn = {
   sello: '',
   Id_transporte_tipo_sel: 0,
   es_compartida: false,
-  asn_id: 0
+  asn_id: 0,
+  csv_file_selected: false
 }
 
 function initASN() {
@@ -45,10 +46,45 @@ ddl_cliente_change();
 ddl_transporte_linea_change();
 ddl_transporte_tipo_change();
 ddl_vendor_change();
-
+btn_upload_csv_click();
+file_detail_product_change();
+frm_upload_csv_submit();
 }
 
 // Metodos
+function frm_upload_csv_submit() {
+  $('#frm_upload_csv').submit(function() {
+    $("#status").empty().text("File is uploading...");
+    $(this).ajaxSubmit({
+
+          error: function(xhr) {
+      status('Error: ' + xhr.status);
+          },
+
+          success: function(response) {
+      $("#status").empty().text(response);
+              console.log(response);
+          }
+  });
+      //Very important line, it disable the page refresh.
+  return false;
+  });    
+
+}
+
+function importProductDetail(id_cliente) {
+  $.getJSON("http://localhost:3002/asn_producto_detalle_by_cte/" + id_cliente, function(data) {
+    if(!$('#cte_no_config').hasClass('d-none'))
+      $('#cte_no_config').addClass('d-none');
+    if (!$('#cte_config').hasClass('d-none'))
+      $('#cte_config').addClass('d-none');
+    if(data==null) {
+      $('#cte_no_config').removeClass('d-none');
+    } else if(data.length>0) 
+      $('#cte_config').removeClass('d-none');
+  })
+}
+
 function selloUpdate() {
   gv_asn.sello = $('#txt_sello').val() + '_' + $('#ddl_cliente').val() + '_' + $('#altTxt_fecha').val() + ':' + $('#txt_hora').val();
   gv_asn.Id_transporte_tipo_sel = 0;
@@ -230,6 +266,25 @@ function saveAsn() {
 })();
 
 // Eventos
+function file_detail_product_change() {
+  $('#file_detail_product').change(()=> {
+    gv_asn.csv_file_selected = $('#file_detail_product').val().length > 0;
+    if(gv_asn.csv_file_selected) {
+      $('#btn_upload_csv').html('Subir archivo: ' + $('#file_detail_product').val());    
+    }
+  });
+}
+
+function btn_upload_csv_click() {
+  $('#btn_upload_csv').click(()=> {
+    if(!gv_asn.csv_file_selected)
+      $('#file_detail_product').trigger('click');
+    else 
+      $('#submit_csv').trigger('click');
+    return false;
+  })
+}
+
 function txt_sello_onChange() {
   $('#txt_sello').change(()=> {
     selloUpdate();
@@ -277,6 +332,7 @@ function add_referencia_click() {
 function ddl_cliente_change() {
   $('#ddl_cliente').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
     selloUpdate();
+    importProductDetail($('#ddl_cliente').val());
   });  
 }
 
