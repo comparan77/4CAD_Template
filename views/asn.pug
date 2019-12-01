@@ -1,9 +1,3 @@
-<form id="frm_upload_csv" enctype="multipart/form-data" action="/asn/upcsv" method="post">
-  <input id="file_detail_product" accept=".csv" type="file" name="file_detail_product" />
-  <input id="submit_csv" type="submit" value="Subir CSV">
-  <span id = "status"></span>
-</form>
-
 form#frm-asn.needs-validation(novalidate)
   div.row
 
@@ -114,3 +108,7 @@ form#frm-asn.needs-validation(novalidate)
         .form-group
           button#add_asn.btn.btn-primary(type="submit") Guardar Aviso de Arribo
  
+form#frm_upload_csv(enctype="multipart/form-data" action="/asn/upcsv" method="post")
+  input#file_detail_product(accept=".csv" type="file" name="det_prod_csv")
+  input#submit_csv(type="submit" value="Subir CSV")
+  span#status

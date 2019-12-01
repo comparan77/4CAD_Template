@@ -9,45 +9,6 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-
-//UPload files
-var multer = require('multer');
-var storage =   multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, './public/uploads');
-  },
-  filename: function (req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now());
-  }
-});
-
-
-app.post('/asn/upcsv',function(req,res){
-
-  var upload = multer({ storage : storage}).single('file_detail_product');
-
-  upload(req,res,function(err) {
-
-    if (req.fileValidationError) {
-      return res.send(req.fileValidationError);
-  }
-  else if (!req.file) {
-      return res.send('Please select an image to upload' + req.file);
-  }
-  else if (err instanceof multer.MulterError) {
-      return res.send(err);
-  }
-  else if (err) {
-      return res.send(err);
-  }
-
-      if(err) {
-          return res.end("Error uploading file." + JSON.stringify(err));
-      }
-      res.end("File is uploaded" + JSON.stringify(req.file));
-  });
-});
-
 // socket
 var server = require('http').Server(app);
 var io = require('socket.io')(server);

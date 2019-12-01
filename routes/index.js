@@ -1,6 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+const path = require('path');
+
+
+//UPload files
+var multer = require('multer');
+var storage =   multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './public/uploads');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -16,6 +31,51 @@ router.get('/dashboard', (req, res, next) => {
 /* ASN. */
 router.get('/asn', (req, res, next) => {
   res.render('asn', { title: 'Aviso de Arribos', option: 'asn', needTbl: true });
+});
+
+router.post('/asn/upcsv',function(req,res){
+
+  var upload = multer({ storage : storage}).single('det_prod_csv');
+
+  upload(req,res,function(err) {
+
+    if (req.fileValidationError) {
+      return res.send(req.fileValidationError);
+  }
+  else if (!req.file) {
+      return res.send('Please select an image to upload' + req.file);
+  }
+  else if (err instanceof multer.MulterError) {
+      return res.send(err);
+  }
+  else if (err) {
+      return res.send(err);
+  }
+
+  if(err) {
+      return res.end("Error uploading file." + JSON.stringify(err));
+  } else {
+
+    const csv = require('csv-parser')
+    const fs = require('fs')
+    const results = [];
+
+    fs.createReadStream(req.file.path)
+      .pipe(csv())
+      .on('data', (data) => results.push(data))
+      .on('end', () => {
+        // console.log(results);
+        // [
+        //   { NAME: 'Daffy Duck', AGE: '24' },
+        //   { NAME: 'Bugs Bunny', AGE: '22' }
+        // ]
+        res.end(JSON.stringify(results));
+      });
+    
+  }
+
+  
+  });
 });
 
 router.get('/recepcion', (req, res, next) => {
