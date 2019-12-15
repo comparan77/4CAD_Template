@@ -69,7 +69,10 @@ router.post('/asn/upcsv',function(req,res){
         //   { NAME: 'Daffy Duck', AGE: '24' },
         //   { NAME: 'Bugs Bunny', AGE: '22' }
         // ]
-        res.end(JSON.stringify(results));
+        // res.end(JSON.stringify(results));
+        // var data = JSON.parse(data);
+        
+        res.render('asn_producto_detail', { asn_prod_det: results });
       });
     
   }

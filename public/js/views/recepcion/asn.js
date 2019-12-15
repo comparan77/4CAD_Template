@@ -58,12 +58,18 @@ function frm_upload_csv_submit() {
     $(this).ajaxSubmit({
 
           error: function(xhr) {
-      status('Error: ' + xhr.status);
+      //status('Error: ' + xhr.status);
+      $("#status").empty().text(JSON.stringify( xhr));
           },
 
           success: function(response) {
-      $("#status").empty().text(response);
-              console.log(response);
+            $('#btn_upload_csv').html('Seleccionar nuevo archivo');
+            gv_asn.csv_file_selected = false;
+            commonViews.clearFileInput('file_detail_product');
+            $("#status").empty().text('ready');
+            $('#div_det_prod_csv').html(response);
+            $('#div_det_prod').removeClass('d-none');
+            $('#div_det_prod').html($('#frm_upload_csv').children('div').html());
           }
   });
       //Very important line, it disable the page refresh.

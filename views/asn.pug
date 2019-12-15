@@ -71,11 +71,13 @@ form#frm-asn.needs-validation(novalidate)
           //- div.form-group
           //-   label(for="txt_cja") Cajas Declaradas
           //-   input#txt_cja.form-control(placeholder='Cajas declaradas' type='number' required)
-          div#cte_no_config.form-group.d-none
+          #cte_no_config.form-group.d-none
             label(for="txt_pza") Piezas Declaradas
             input#txt_pza.form-control(placeholder='Piezas declaradas' type='number' required)
-          div#cte_config.form-group.d-none
+          #cte_config.form-group.d-none
             button#btn_upload_csv Seleccionar archivo
+            #div_det_prod.d-none aqui
+
   
   div.row
     div.col-xl-12.col-lg-12
@@ -108,7 +110,9 @@ form#frm-asn.needs-validation(novalidate)
         .form-group
           button#add_asn.btn.btn-primary(type="submit") Guardar Aviso de Arribo
  
-form#frm_upload_csv(enctype="multipart/form-data" action="/asn/upcsv" method="post")
+form#frm_upload_csv.d-none(enctype="multipart/form-data" action="/asn/upcsv" method="post")
   input#file_detail_product(accept=".csv" type="file" name="det_prod_csv")
   input#submit_csv(type="submit" value="Subir CSV")
   span#status
+  #div_det_prod_csv
+    include asn_producto_detail.pug
