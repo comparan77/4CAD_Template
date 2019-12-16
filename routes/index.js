@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 const path = require('path');
-
+const jsStringify = require('js-stringify');
 
 //UPload files
 var multer = require('multer');
@@ -76,7 +76,7 @@ router.post('/asn/upcsv',function(req,res){
           heads.push(property);
         var totPieza = 0;
         totPieza = results.reduce((total, obj) => total + (obj.piezas * 1 || 0),0 );
-        res.render('asn_producto_detail', { heads: heads, asn_prod_det: results, totPieza: totPieza });
+        res.render('asn_producto_detail', { heads: heads, asn_prod_det: results, totPieza: totPieza, jsStringify });
       });    
   }
   

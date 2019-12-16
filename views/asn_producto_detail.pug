@@ -18,4 +18,5 @@ if asn_prod_det != undefined
           .form-group
             label Piezas Declaradas:&nbsp;
             span #{totPieza}
-            
+            script.
+              var tot = !{jsStringify(asn_prod_det)};

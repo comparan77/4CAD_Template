@@ -250,7 +250,7 @@ function saveAsn() {
 function frm_upload_csv_submit() {
   $('#frm_upload_csv').submit(function() {
     $("#status").empty().text("File is uploading...");
-    $(this).ajaxSubmit({
+    /* $(this).ajaxSubmit({
 
           error: function(xhr) {
       //status('Error: ' + xhr.status);
@@ -258,6 +258,7 @@ function frm_upload_csv_submit() {
           },
 
           success: function(response) {
+            
             $('#btn_upload_csv').html('Seleccionar nuevo archivo');
             gv_asn.csv_file_selected = false;
             commonViews.clearFileInput('file_detail_product');
@@ -268,7 +269,23 @@ function frm_upload_csv_submit() {
           }
   });
       //Very important line, it disable the page refresh.
-  return false;
+  return false; */
+
+    var form = $(this).ajaxSubmit({ target: '#div_det_prod_csv' });
+    var xhr = form.data('jqxhr');
+
+    xhr.done(function() {
+      $('#btn_upload_csv').html('Seleccionar nuevo archivo');
+      gv_asn.csv_file_selected = false;
+      commonViews.clearFileInput('file_detail_product');
+      $("#status").empty().text('ready');
+      // $('#div_det_prod_csv').html(response);
+      $('#div_det_prod').removeClass('d-none');
+      $('#div_det_prod').html($('#frm_upload_csv').children('div').html());
+      console.log(tot)
+    });
+    return false;
+
   });    
 
 }
