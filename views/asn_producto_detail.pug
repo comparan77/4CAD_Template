@@ -3,6 +3,19 @@ if asn_prod_det != undefined
     .row
       .col
         #tblDetailProd
-          each item in asn_prod_det
-            .row #{item.tarima}
+          table#tbl_prod_detail.table.table-bordered(width="100%" style="cellspacing:0")
+            thead
+              tr
+                each headItem in heads
+                  td #{headItem}
+            tbody
+              each item in asn_prod_det
+                tr 
+                  each data in item
+                    td #{data}
+          //- each item in asn_prod_det
+          //-   .row #{item.tarima}
+          .form-group
+            label Piezas Declaradas:&nbsp;
+            span #{totPieza}
             

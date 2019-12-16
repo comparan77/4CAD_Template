@@ -71,12 +71,14 @@ router.post('/asn/upcsv',function(req,res){
         // ]
         // res.end(JSON.stringify(results));
         // var data = JSON.parse(data);
-        
-        res.render('asn_producto_detail', { asn_prod_det: results });
-      });
-    
+        var heads = [];
+        for (var property in results[0])
+          heads.push(property);
+        var totPieza = 0;
+        totPieza = results.reduce((total, obj) => total + (obj.piezas * 1 || 0),0 );
+        res.render('asn_producto_detail', { heads: heads, asn_prod_det: results, totPieza: totPieza });
+      });    
   }
-
   
   });
 });

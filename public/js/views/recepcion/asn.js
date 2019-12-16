@@ -52,32 +52,6 @@ frm_upload_csv_submit();
 }
 
 // Metodos
-function frm_upload_csv_submit() {
-  $('#frm_upload_csv').submit(function() {
-    $("#status").empty().text("File is uploading...");
-    $(this).ajaxSubmit({
-
-          error: function(xhr) {
-      //status('Error: ' + xhr.status);
-      $("#status").empty().text(JSON.stringify( xhr));
-          },
-
-          success: function(response) {
-            $('#btn_upload_csv').html('Seleccionar nuevo archivo');
-            gv_asn.csv_file_selected = false;
-            commonViews.clearFileInput('file_detail_product');
-            $("#status").empty().text('ready');
-            $('#div_det_prod_csv').html(response);
-            $('#div_det_prod').removeClass('d-none');
-            $('#div_det_prod').html($('#frm_upload_csv').children('div').html());
-          }
-  });
-      //Very important line, it disable the page refresh.
-  return false;
-  });    
-
-}
-
 function importProductDetail(id_cliente) {
   $.getJSON("http://localhost:3002/asn_producto_detalle_by_cte/" + id_cliente, function(data) {
     if(!$('#cte_no_config').hasClass('d-none'))
@@ -272,6 +246,33 @@ function saveAsn() {
 })();
 
 // Eventos
+
+function frm_upload_csv_submit() {
+  $('#frm_upload_csv').submit(function() {
+    $("#status").empty().text("File is uploading...");
+    $(this).ajaxSubmit({
+
+          error: function(xhr) {
+      //status('Error: ' + xhr.status);
+      $("#status").empty().text(JSON.stringify( xhr));
+          },
+
+          success: function(response) {
+            $('#btn_upload_csv').html('Seleccionar nuevo archivo');
+            gv_asn.csv_file_selected = false;
+            commonViews.clearFileInput('file_detail_product');
+            $("#status").empty().text('ready');
+            $('#div_det_prod_csv').html(response);
+            $('#div_det_prod').removeClass('d-none');
+            $('#div_det_prod').html($('#frm_upload_csv').children('div').html());
+          }
+  });
+      //Very important line, it disable the page refresh.
+  return false;
+  });    
+
+}
+
 function file_detail_product_change() {
   $('#file_detail_product').change(()=> {
     gv_asn.csv_file_selected = $('#file_detail_product').val().length > 0;
