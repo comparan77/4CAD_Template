@@ -76,7 +76,13 @@ router.post('/asn/upcsv',function(req,res){
           heads.push(property);
         var totPieza = 0;
         totPieza = results.reduce((total, obj) => total + (obj.piezas * 1 || 0),0 );
-        res.render('asn_producto_detail', { heads: heads, asn_prod_det: results, totPieza: totPieza, jsStringify });
+        var resCsv = {
+          heads: heads,
+          asn_prod_det: results,
+          totPieza: totPieza,
+          csv_file_name: req.file.path
+        }
+        res.render('asn_producto_detail', { result: resCsv, jsStringify });
       });    
   }
   

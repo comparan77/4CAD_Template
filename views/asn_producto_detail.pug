@@ -1,4 +1,4 @@
-if asn_prod_det != undefined
+if result != undefined
   .container
     .row
       .col
@@ -6,10 +6,10 @@ if asn_prod_det != undefined
           table#tbl_prod_detail.table.table-bordered(width="100%" style="cellspacing:0")
             thead
               tr
-                each headItem in heads
+                each headItem in result.heads
                   td #{headItem}
             tbody
-              each item in asn_prod_det
+              each item in result.asn_prod_det
                 tr 
                   each data in item
                     td #{data}
@@ -17,6 +17,7 @@ if asn_prod_det != undefined
           //-   .row #{item.tarima}
           .form-group
             label Piezas Declaradas:&nbsp;
-            span #{totPieza}
+            span #{result.totPieza}
             script.
-              var tot = !{jsStringify(asn_prod_det)};
+              var head = !{jsStringify(result.heads)};
+              var csv_file_name = !{jsStringify(result.csv_file_name)};

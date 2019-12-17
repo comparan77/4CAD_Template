@@ -5,7 +5,11 @@ var gv_asn = {
   Id_transporte_tipo_sel: 0,
   es_compartida: false,
   asn_id: 0,
-  csv_file_selected: false
+  csv_file_selected: false,
+  csv_file_detail_prod: {
+    name: '',
+    head: []
+  }
 }
 
 function initASN() {
@@ -176,6 +180,7 @@ function saveAsn() {
       Id_asn: gv_asn.asn_id,
       Id_vendor_producto: $('#ddl_vendor_producto').val(),
       Pieza_declarada: $('#txt_pza').val(),
+      Csv_file_detail_prod: gv_asn.csv_file_detail_prod
     }
 
     var oAsn;
@@ -282,8 +287,12 @@ function frm_upload_csv_submit() {
       // $('#div_det_prod_csv').html(response);
       $('#div_det_prod').removeClass('d-none');
       $('#div_det_prod').html($('#frm_upload_csv').children('div').html());
-      console.log(tot)
+      gv_asn.csv_file_detail_prod.name = csv_file_name;
+      gv_asn.csv_file_detail_prod.head = head;
+      console.log(JSON.stringify(gv_asn.csv_file_detail_prod));
     });
+    
+    //Very important line, it disable the page refresh.
     return false;
 
   });    
