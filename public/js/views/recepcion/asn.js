@@ -182,7 +182,6 @@ function saveAsn() {
       Pieza_declarada: $('#txt_pza').val(),
       Csv_file_detail_prod: gv_asn.csv_file_detail_prod
     }
-
     var oAsn;
     if (!gv_asn.es_compartida) {
       oAsn = {
@@ -287,9 +286,10 @@ function frm_upload_csv_submit() {
       // $('#div_det_prod_csv').html(response);
       $('#div_det_prod').removeClass('d-none');
       $('#div_det_prod').html($('#frm_upload_csv').children('div').html());
+      $('#txt_pza').val(totPieza)
       gv_asn.csv_file_detail_prod.name = csv_file_name;
       gv_asn.csv_file_detail_prod.head = head;
-      console.log(JSON.stringify(gv_asn.csv_file_detail_prod));
+      // console.log(JSON.stringify(gv_asn.csv_file_detail_prod.head));
     });
     
     //Very important line, it disable the page refresh.
