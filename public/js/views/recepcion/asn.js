@@ -339,7 +339,12 @@ function txt_hora_onChange() {
 function add_referencia_click() {
   $('#add_referencia').click(obj => {
 
+    //console.log(gv_asn.lstDoc);
+
     if($('#txt_referencia').val().length<1) 
+      return false;
+
+    if($('#ddl_documento option:selected').html().length<1)
       return false;
 
     var oDoc = {
@@ -404,7 +409,8 @@ function chk_doc_requerido_click(control) {
     var objCheck = gv_asn.lstDoc.filter(obj => {
       return obj.id == idCheck;
     })[0];
-
     objCheck.requerido = $(control).prop('checked');
+    objCheck.chkReq = '<input id="chkReq_' +  objCheck.id + '" class="chkReq" type="checkbox" checked>';
+    console.log(objCheck);
   })
 }
