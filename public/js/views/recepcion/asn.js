@@ -14,7 +14,7 @@ var gv_asn = {
 
 function initASN() {
 
-var arrCatalogos = ['cliente', 'almacen', 'transporte_linea', 'vendor', 'documento'];
+var arrCatalogos = ['Cliente', 'Almacen', 'TransporteLinea', 'Vendor', 'Documento'];
 
 fillCatalog(arrCatalogos);
 
@@ -47,9 +47,9 @@ txt_hora_onChange();
 txt_sello_onChange();
 add_referencia_click();
 ddl_cliente_change();
-ddl_transporte_linea_change();
-ddl_transporte_tipo_change();
-ddl_vendor_change();
+ddl_TransporteLinea();
+ddl_TransporteTipo_change();
+ddl_Vendor_change();
 btn_upload_csv_click();
 file_detail_product_change();
 frm_upload_csv_submit();
@@ -79,7 +79,7 @@ function selloUpdate() {
     if(data.Id != undefined) {
       $('#ddl_almacen').selectpicker('val', data.Id_almacen);
       $('#txt_operador').val(data.Operador);
-      $('#ddl_transporte_linea').selectpicker('val', data.Id_transporte_linea);
+      $('#ddl_TransporteLinea').selectpicker('val', data.Id_transporte_linea);
       gv_asn.Id_transporte_tipo_sel = data.Id_transporte_tipo;
       $('#txt_placa').val(data.Placa);
       $('#txt_caja').val(data.Caja);
@@ -113,7 +113,7 @@ function fillCatalog(arrCatalogos, idx = 0) {
   $.getJSON( "http://localhost:3002/" + c, function( data ) {
 
     var $dropdown = $('#ddl_' + c);
-    commonViews.fillDropDown(data, 'ddl_' + c, 'Id', 'Nombre');
+    commonViews.fillDropDown(data, 'ddl_' + c, c+'Id', c+'Nombre');
     $dropdown.selectpicker();
     $dropdown.selectpicker('refresh');
     idx ++;
@@ -123,15 +123,15 @@ function fillCatalog(arrCatalogos, idx = 0) {
 }
 
 function fillTransporte_tipo(id) {
-  $('#ddl_transporte_tipo').html('');
-  $.getJSON("http://localhost:3002/transporte_linea_tipo/" + id, function(data) {
+  $('#ddl_TransporteTipo').html('');
+  $.getJSON("http://localhost:3002/transportelineatipo/" + id, function(data) {
       $.each(data, (key,val) =>  { 
-        $('#ddl_transporte_tipo').append('<option placa="' + val.placa + '" caja="' + val.caja + '" cont_1="' + val.cont_1 + '" cont_2="' + val.cont_2 + '" value="' + val.Id + '">' + val.Nombre + '</option>')
+        $('#ddl_TransporteTipo').append('<option placa="' + val.TransporteTipoPlaca + '" caja="' + val.TransporteTipoCaja + '" cont_1="' + val.TransporteTipoContenedorUno + '" cont_2="' + val.TransporteTipoContenedorDos + '" value="' + val.TransporteTipoId + '">' + val.TransporteTipoNombre + '</option>')
     });
-    $('#ddl_transporte_tipo').selectpicker('refresh');
+    $('#ddl_TransporteTipo').selectpicker('refresh');
     $('#datosVehiculo').addClass('d-none');
     if(gv_asn.Id_transporte_tipo_sel > 0) {
-      $('#ddl_transporte_tipo').selectpicker('val', gv_asn.Id_transporte_tipo_sel);
+      $('#ddl_TransporteTipo').selectpicker('val', gv_asn.Id_transporte_tipo_sel);
     }
   });
 }
@@ -150,16 +150,16 @@ function setFormTransporteTipo() {
   $('#datosVehiculo').removeClass('d-none');
   $('#div_placa, #div_caja, #div_cont1, #div_cont2').addClass('d-none');
 
-  if($('#ddl_transporte_tipo  option:selected').attr('placa')=='1')
+  if($('#ddl_TransporteTipo  option:selected').attr('placa')=='1')
     $('#div_placa').removeClass('d-none');
   
-  if($('#ddl_transporte_tipo  option:selected').attr('caja')=='1')
+  if($('#ddl_TransporteTipo  option:selected').attr('caja')=='1')
     $('#div_caja').removeClass('d-none');
   
-  if($('#ddl_transporte_tipo  option:selected').attr('cont_1')=='1')
+  if($('#ddl_TransporteTipo  option:selected').attr('cont_1')=='1')
     $('#div_cont1').removeClass('d-none');
 
-  if($('#ddl_transporte_tipo  option:selected').attr('cont_2')=='1')
+  if($('#ddl_TransporteTipo  option:selected').attr('cont_2')=='1')
     $('#div_cont2').removeClass('d-none');
 }
 
@@ -192,8 +192,8 @@ function saveAsn() {
         Operador: $('#txt_operador').val(),
         Sello: $('#txt_sello').val(),
         Sello_cte_dt: $('#txt_sello').val() + '_' + $('#ddl_cliente').val() + '_' + $('#altTxt_fecha').val() + ':' + $('#txt_hora').val(),
-        Id_transporte_linea: $('#ddl_transporte_linea').val(),
-        Id_transporte_tipo: $('#ddl_transporte_tipo').val(),
+        Id_transporte_linea: $('#ddl_TransporteLinea').val(),
+        Id_transporte_tipo: $('#ddl_TransporteTipo').val(),
         Placa: $('#txt_placa').val(),
         Caja: $('#txt_caja').val(),
         Cont_1: $('#txt_contenedor-1').val(),
@@ -374,21 +374,21 @@ function ddl_cliente_change() {
   });  
 }
 
-function ddl_transporte_linea_change() {
-  $('#ddl_transporte_linea').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-    fillTransporte_tipo($('#ddl_transporte_linea').val());
+function ddl_TransporteLinea() {
+  $('#ddl_TransporteLinea').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    fillTransporte_tipo($('#ddl_TransporteLinea').val());
   });  
 }
 
-function ddl_transporte_tipo_change() {
-  $('#ddl_transporte_tipo').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+function ddl_TransporteTipo_change() {
+  $('#ddl_TransporteTipo').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
     setFormTransporteTipo();
   });
 }
 
-function ddl_vendor_change() {
-  $('#ddl_vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-    fillVendor_producto($('#ddl_vendor').val());
+function ddl_Vendor_change() {
+  $('#ddl_Vendor').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+    fillVendor_producto($('#ddl_Vendor').val());
   });
 }
 

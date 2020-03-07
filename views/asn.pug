@@ -11,7 +11,7 @@ form#frm-asn.needs-validation(novalidate)
           div.form-group
             //- label(for="txt_cliente") Cliente
             //- input#txt_cliente.form-control(placeholder='Nombre del Cliente' type='text')
-            select#ddl_cliente.selectpicker.form-control.custom-select(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente" required)
+            select#ddl_Cliente.selectpicker.form-control.custom-select(aria-expanded="false" data-live-search="true" data-title="Seleccione un Cliente" required)
           //- div.form-group
           //-   select#ddl_aduana.selectpicker.form-control(data-live-search="true" data-title="Seleccione una aduana")
           div.form-group
@@ -32,14 +32,14 @@ form#frm-asn.needs-validation(novalidate)
             label(for="txt_sello") Sello
             input#txt_sello.form-control(placeholder='Número de sello' type='text')
           div.form-group
-            select#ddl_almacen.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén" required)
+            select#ddl_Almacen.selectpicker.form-control(aria-expanded="false" data-live-search="true" data-title="Seleccione un Almacén" required)
           div.form-group
             label(for="txt_operador") Operador
             input#txt_operador.form-control(placeholder='Nombre del Operador' type='text')
           div.form-group
-            select#ddl_transporte_linea.selectpicker.form-control(data-live-search="true" data-title="Seleccione una linea de transporte")
+            select#ddl_TransporteLinea.selectpicker.form-control(data-live-search="true" data-title="Seleccione una linea de transporte")
           div.form-group
-            select#ddl_transporte_tipo.selectpicker.form-control(data-live-search="true" data-title="Seleccione un tipo de transporte")
+            select#ddl_TransporteTipo.selectpicker.form-control(data-live-search="true" data-title="Seleccione un tipo de transporte")
           #datosVehiculo.d-none
             div#div_placa.form-group
               label(for="txt_placa") Placa
@@ -61,7 +61,7 @@ form#frm-asn.needs-validation(novalidate)
           div.m-0.font-weight-bold.text-primary 3.- Producto
         div.card-body
           div.form-group
-            select#ddl_vendor.selectpicker.form-control(data-live-search="true" data-title="Seleccione un vendor" required)
+            select#ddl_Vendor.selectpicker.form-control(data-live-search="true" data-title="Seleccione un vendor" required)
           div.form-group
             label(for="txt_producto") Producto
             select#ddl_vendor_producto.selectpicker.form-control(data-live-search="true" data-title="Seleccione el producto" required)
