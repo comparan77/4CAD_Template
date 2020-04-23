@@ -344,15 +344,15 @@ function add_referencia_click() {
     if($('#txt_referencia').val().length<1) 
       return false;
 
-    if($('#ddl_documento option:selected').html().length<1)
+    if($('#ddl_Documento option:selected').html().length<1)
       return false;
 
     var oDoc = {
-      id: $('#ddl_documento').val(),
-      tipo: $('#ddl_documento option:selected').html(),
+      id: $('#ddl_Documento').val(),
+      tipo: $('#ddl_Documento option:selected').html(),
       valor: $('#txt_referencia').val(),
-      chkReq: '<input id="chkReq_' +  $('#ddl_documento').val() + '" class="chkReq" type="checkbox">',
-      quitar: '<a class="dltDoc" id="dlt_' +  $('#ddl_documento').val() + '" href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-eraser"></i></a>',
+      chkReq: '<input id="chkReq_' +  $('#ddl_Documento').val() + '" class="chkReq" type="checkbox">',
+      quitar: '<a class="dltDoc" id="dlt_' +  $('#ddl_Documento').val() + '" href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-eraser"></i></a>',
       requerido: false
     }
   
